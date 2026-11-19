@@ -1,0 +1,24 @@
+import {ProviderTaskPanel} from './ProviderTaskPanel';
+import React,{useEffect,useState} from 'react';
+import {ui,useUiLocale,uiFeedback} from '../shared/ui-locale.mjs';
+import {effectiveInput} from '../shared/core.mjs';
+import {modelChoice} from '../shared/task-settings.mjs';
+import {useTaskFields} from './task-drafts';
+import {BytePlusVideoPanel} from './BytePlusVideoPanel';
+import {BytePlusImagePanel} from './BytePlusImagePanel';
+import './task-settings.css';
+type Any=Record<string,any>;
+export function TaskSettings({g,nodeId,disabled=false,onApply,onDraft,openPrompt,compact=false}:Any){useUiLocale(React);const n=g.nodes.find((n:Any)=>n.id===nodeId),kind=n.kind==='generate.video'?'video':'image',key=kind+'|'+g.projectId+'|'+g.graphId+'|'+nodeId,form=useTaskFields(key,{route:'',inputDirty:false}),[snapshot,setSnapshot]=useState<Any|null>(null),[error,setError]=useState('');
+ useEffect(()=>{let live=true;const load=()=>{(window.canvasAPI.apiUiRead() as Promise<any>).then(r=>{if(!r.ok)throw r.error;if(live)setSnapshot(r.value);}).catch(e=>{if(live)setError(e.code??'UI_CONTEXT');});};load();window.addEventListener('api-ui-config-changed',load);return()=>{live=false;window.removeEventListener('api-ui-config-changed',load);};},[g.projectId,g.graphId,nodeId]);
+ useEffect(()=>{if(!form.state.inputDirty)form.patch({route:n.payload.taskModel?.routingId??''});},[n.payload.taskModel?.routingId,form.state.resetRevision]);
+ useEffect(()=>{onDraft?.(nodeId,form.state.inputDirty);},[nodeId,form.state.inputDirty]);
+ const routes=(snapshot?.config.routings??[]).filter((r:Any)=>snapshot!.config.models.some((m:Any)=>m.modelId===r.modelId&&m.mediaKind===kind.toUpperCase())),choice=snapshot?modelChoice(snapshot.config,form.state.route):null,cap=snapshot?.routeCapabilities?.[form.state.route],typed=kind==='video'?!!cap?.VIDEO_REFERENCE:!!cap?.IMAGE_REFERENCE?.imageOperations,typedAvailable=routes.some((r:Any)=>kind==='video'?snapshot?.routeCapabilities?.[r.routingId]?.VIDEO_REFERENCE:snapshot?.routeCapabilities?.[r.routingId]?.IMAGE_REFERENCE?.imageOperations);
+ let input:Any;try{input=effectiveInput(g,n);}catch(e:any){input={prompt:'',errors:[e.code??e.message]};}
+ const apply=onApply??(async(operation:Any)=>{const r=await window.canvasAPI.command({commandVersion:1,commandId:'cmd-'+crypto.randomUUID(),projectId:g.projectId,graphId:g.graphId,expectedRevision:g.revision,operation});if(!r.ok)throw r.error;window.dispatchEvent(new Event('c5-state-changed'));return r.value;});
+ return <section className={'task-settings nodrag nowheel '+(compact?'is-compact':'')} data-task-settings={nodeId} onPointerDown={e=>e.stopPropagation()} onKeyDown={e=>e.stopPropagation()}>
+ <label className="field task-model">{ui('模型')}<select aria-label={ui('任务模型')} value={form.state.route} disabled={disabled||!snapshot} onChange={e=>form.patch({route:e.target.value,inputDirty:true})}><option value="">{ui('选择模型…')}</option>{n.payload.taskModel&&!routes.some((r:Any)=>r.routingId===n.payload.taskModel.routingId)&&<option value={n.payload.taskModel.routingId}>{ui('原模型连接不可用')}</option>}{routes.map((r:Any)=><option key={r.routingId} value={r.routingId}>{modelChoice(snapshot!.config,r.routingId)?.label}</option>)}</select></label>
+ {n.payload.taskModel&&!n.payload.taskModel.inputKind&&[n.payload.videoInputSelection,n.payload.imageInputSelection,n.payload.providerInputSelection].filter(Boolean).length>1&&<div role="alert">{ui('请重新应用当前模型。原设置已保留。')}<button disabled={disabled} onClick={()=>form.patch({inputDirty:true})}>{ui('重新应用当前模型')}</button></div>}<div className="task-prompt"><div><strong>{ui(n.payload.promptMode==='inline'?'提示词':'合并后的提示词')}</strong><button type="button" disabled={disabled} onClick={openPrompt}>{ui(n.payload.promptMode==='inline'?'编辑提示词':n.payload.promptMode==='external'?'編輯框內原文':'编辑补充文字')}</button></div><p className="task-prompt-text">{input.prompt||ui('描述你想创作的画面')}</p></div>
+ {error&&<div role="alert">{uiFeedback(React,error,true)}</div>}
+ {(typed||!choice&&typedAvailable)?(kind==='video'?<BytePlusVideoPanel g={g} nodeId={nodeId} routeId={form.state.route} taskUI disabled={disabled} onApply={apply} onDraft={onDraft}/>:<BytePlusImagePanel g={g} nodeId={nodeId} routeId={form.state.route} taskUI disabled={disabled} onApply={apply} onDraft={onDraft}/>):choice?<ProviderTaskPanel g={g} nodeId={nodeId} routeId={form.state.route} snapshot={snapshot} disabled={disabled} onApply={apply} onDraft={onDraft}/>:<div className="task-empty"><p>{ui('选择模型后即可设置创作参数。')}</p><button type="button" onClick={()=>window.dispatchEvent(new CustomEvent('open-model-settings',{detail:{view:'connections'}}))}>{ui('管理模型与连接')}</button>{form.state.inputDirty&&<button disabled={disabled} onClick={()=>form.patch({route:n.payload.taskModel?.routingId??'',inputDirty:false})}>{ui('取消更改')}</button>}</div>}
+ </section>;
+}

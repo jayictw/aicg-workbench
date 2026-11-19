@@ -1,0 +1,12 @@
+import {ui,useUiLocale} from '../shared/ui-locale.mjs';
+import React,{useEffect,useState} from 'react';
+import {sourceFor} from '../shared/edit-runtime.mjs';
+import {ArrowUp,ArrowDown,Film} from 'lucide-react';
+type Any=Record<string,any>;
+export function MergeSelection({graph,selection,busy,hasDraft,onMerge,onOrder}:{graph:Any,selection:string[],busy:boolean,hasDraft:boolean,onMerge:(ids:string[])=>void;onOrder?:(ids:string[])=>void}){useUiLocale(React);
+ const eligible=selection.filter(id=>{try{const n=graph.nodes.find((n:Any)=>n.id===id),r=sourceFor(graph,id);return n&&graph.mediaVersions[r.mediaVersionId]?.type==='video';}catch{return false;}}),key=[...eligible].sort().join('|'),[order,setOrder]=useState<string[]>([]);
+ useEffect(()=>{const explicit=graph.sequence?.edit?.clips?.map((c:Any)=>c.nodeId)??[],unique=[...new Set(explicit)] as string[];setOrder(unique.length===eligible.length&&unique.every(id=>eligible.includes(id))?unique:[]);},[key]);
+ useEffect(()=>{onOrder?.(eligible.length>=2&&order.length===eligible.length?order:[]);},[key,order.join('|')]);
+ if(eligible.length<2)return null;const remaining=eligible.filter(id=>!order.includes(id)),choose=(id:string)=>{const next=[...order,id],left=eligible.filter(x=>!next.includes(x));setOrder(left.length===1?[...next,left[0]]:next);};
+ return <section className="merge-selection nodrag nowheel" aria-label={ui("畫布影片合併順序")}><div><b><Film size={16}/>{ui("合併")+" "}{eligible.length} {" "+ui("支已完成影片")}</b><small>{remaining.length ? ui("請指定先後；一般連線和位置不決定播放順序") : ui("合併採用下列明確順序")}</small></div>{order.length>0&&<ol>{order.map((id,i)=><li key={id}><b>{(i+1)}</b><span>{graph.nodes.find((n:Any)=>n.id===id)?.humanCode} · {graph.nodes.find((n:Any)=>n.id===id)?.label}</span><button aria-label={(ui("合併順序上移")+" "+((i+1)))} disabled={i===0||busy} onClick={()=>{const a=[...order];[a[i-1],a[i]]=[a[i],a[i-1]];setOrder(a);}}><ArrowUp size={13}/></button><button aria-label={(ui("合併順序下移")+" "+((i+1)))} disabled={i===order.length-1||busy} onClick={()=>{const a=[...order];[a[i+1],a[i]]=[a[i],a[i+1]];setOrder(a);}}><ArrowDown size={13}/></button></li>)}</ol>}{remaining.length>0&&<div className="merge-pick">{remaining.map(id=><button key={id} onClick={()=>choose(id)}>{ui("第")+" "}{(order.length+1)} {" "+ui("支：")}{graph.nodes.find((n:Any)=>n.id===id)?.label}</button>)}</div>}<button className="primary" disabled={busy||hasDraft||remaining.length>0} onClick={()=>onMerge(order)}>{ui("一鍵合併成新節點")}</button>{hasDraft&&<small>{ui("先套用現有裁切草稿，再合併。")}</small>}</section>;
+}

@@ -1,0 +1,10 @@
+import {useCallback,useSyncExternalStore} from 'react';
+import type {Dispatch,SetStateAction} from 'react';
+type Row={value:Record<string,any>,defaults:Record<string,any>,lastDirty:boolean,listeners:Set<()=>void>};
+const rows=new Map<string,Row>(),allListeners=new Set<()=>void>();
+function emit(r?:Row){for(const fn of r?.listeners??[])fn();if(r){const dirty=!!r.value.inputDirty;if(dirty===r.lastDirty)return;r.lastDirty=dirty;}for(const fn of allListeners)fn();}
+export function subscribeTaskDrafts(fn:()=>void){allListeners.add(fn);return()=>{allListeners.delete(fn);};}
+export function getTaskDrafts(){return [...rows].filter(([,r])=>r.value.inputDirty).map(([key])=>{const [kind,projectId,graphId,nodeId]=key.split('|');return {key,kind,projectId,graphId,nodeId};});}
+export function discardTaskFields(keys:Iterable<string>){for(const key of keys){const r=rows.get(key);if(!r)continue;r.value={...r.defaults,inputDirty:false,resetRevision:(r.value.resetRevision??0)+1};emit(r);}}
+export function clearTaskDrafts(){rows.clear();emit();}
+export function useTaskFields<T extends Record<string,any>>(key:string,defaults:T){if(!rows.has(key))rows.set(key,{value:{...defaults,resetRevision:0},defaults:{...defaults},lastDirty:false,listeners:new Set()});const r=rows.get(key)!;r.defaults={...defaults,...r.defaults};if(Object.keys(defaults).some(k=>!(k in r.value)))r.value={...defaults,...r.value};const subscribe=useCallback((fn:()=>void)=>{r.listeners.add(fn);return()=>{r.listeners.delete(fn);};},[r]),snapshot=useCallback(()=>r.value as T&{resetRevision:number},[r]);const state=useSyncExternalStore(subscribe,snapshot,snapshot);function field<K extends keyof T>(name:K):[T[K],Dispatch<SetStateAction<T[K]>>]{return [state[name],next=>{const v=typeof next==='function'?(next as (v:T[K])=>T[K])(r.value[name as string]):next;if(Object.is(v,r.value[name as string]))return;r.value={...r.value,[name]:v};emit(r);}];}return {state,field,patch:(next:Partial<T>)=>{r.value={...r.value,...next};emit(r);}};}

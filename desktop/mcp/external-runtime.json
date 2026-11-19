@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "authority": "Owner-selected exact local MCP client, explicit read/edit project scope; paid native confirmation remains independent",
+  "mcpClientRegistryVersion": 1,
+  "nativeBridgeVersion": 1,
+  "codeRoot": ".",
+  "runtimeRoot": "runtime",
+  "node": "",
+  "powershell": "",
+  "codexCli": "",
+  "disabled": true
+}

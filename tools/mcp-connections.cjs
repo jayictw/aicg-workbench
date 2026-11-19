@@ -1,0 +1,7 @@
+'use strict';
+// Explicit local user administration, not exposed as an MCP tool.
+const path=require('node:path'),base=path.resolve(__dirname,'..'),p=require('../desktop/mcp/connection-policy.cjs');
+function parse(a){const out={};for(let i=0;i<a.length;i++){const k=a[i];if(!['--action','--id','--name','--permission','--project-ids','--workspace','--allow-launch','--expires-hours','--until-revoked'].includes(k)||out[k]!==undefined)throw Error('MCP_CLIENT_ARGUMENTS');out[k]=['--workspace','--allow-launch','--until-revoked'].includes(k)?true:a[++i];}return out;}
+function run(a){if(a['--action']==='list')return {connections:p.list(base)};if(a['--action']==='revoke')return p.revoke(base,a['--id']);if(a['--action']==='export'){const e=require('../desktop/mcp/client-policy.cjs').read(base).clients.find(e=>e.id===a['--id']);if(!e)throw Error('MCP_CLIENT_NOT_REGISTERED');return p.configuration(base,e);}if(a['--action']!=='create')throw Error('MCP_CLIENT_ARGUMENTS');return p.create(base,{name:a['--name'],permission:a['--permission'],projectIds:a['--project-ids']?.split(',')??[],workspace:!!a['--workspace'],allowLaunch:!!a['--allow-launch'],untilRevoked:!!a['--until-revoked'],...(!a['--until-revoked']?{expiresHours:Number(a['--expires-hours'])}:{})});}
+if(require.main===module){try{process.stdout.write(JSON.stringify(run(parse(process.argv.slice(2))),null,2)+'\n');}catch(e){process.stderr.write((/^MCP_[A-Z_]+$/.test(e.message)?e.message:'MCP_CONNECTION_FAILED')+'\n');process.exitCode=2;}}
+module.exports={parse,run};

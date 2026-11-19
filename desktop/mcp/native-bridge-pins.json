@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "runtime": "Windows .NET Framework 4.6+ and application embedded Node",
+  "files": {
+    "tools/AICG-MCP.exe": "10fd6b76f5d5f4368cac667134c7615282e73d5fe8fa2e90f4923b44801d605d",
+    "tools/electron/electron.exe": "8e84549b05d27d444da2957653200d1e0ac287eff0fc5722b92835b9e0821a59",
+    "tools/connect-native-codex.cjs": "19a6cc3c1667e704dca75fd39a50f03005a1da35738b089cea0316bc44bee032",
+    "desktop/mcp/external-adapter.cjs": "b5dd875e5d87a3ca8dfd67837d0cfc51d06a5b9ba905d782f64d0b09fde7a0eb",
+    "tools/mcp-connections.cjs": "6d61716e32b2b04b5fcb35316c126f241fcb59b3a57b537610bbcdcfb32bec7f",
+    "desktop/c6-main.cjs": "8c7410cf8cc9e0ba3d0c5d34c73b7f947a3498fad727619484e0129885b83f55"
+  }
+}

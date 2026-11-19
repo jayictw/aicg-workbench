@@ -1,0 +1,4 @@
+'use strict';
+const c=require('./d1-json.cjs'),{SourceController}=require('./d1-controller.cjs');
+function install({ipcMain,paths,sender,current,call}){const controller=new SourceController({profileRoot:paths.profileRoot,current,readCore:call});const methods=['newTask','bind','generate','list','take','join'];for(const method of methods)ipcMain.handle('d1:'+method,async(e,r,...extra)=>{try{sender(e);if(paths.mode==='original-recovery'&&['newTask','generate','join'].includes(method))c.fail('RECOVERY_READ_ONLY');if(method==='generate'&&paths.unifiedEnabled)c.fail('USE_IMAGE_PIPELINE');if(extra.length||!r||Buffer.byteLength(JSON.stringify(r))>160000)c.fail('IPC_SCHEMA');return {ok:true,value:await controller[method](r)}}catch(error){return {ok:false,code:/^C_D1_/.test(error?.message||'')?error.message:'C_D1_FAILED'}}});return controller}
+module.exports={install};

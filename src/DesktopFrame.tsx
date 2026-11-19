@@ -1,0 +1,3 @@
+import React from 'react';
+import {ui,useUiLocale} from '../shared/ui-locale.mjs';
+export function DesktopFrame({children,nativeControls=false}:{children:React.ReactNode;nativeControls?:boolean}){useUiLocale(React);return <div className={'desktop-frame'+(nativeControls?' has-native-controls':'')}>{nativeControls&&<header className="desktop-titlebar"><button type="button" className="desktop-brand" aria-label={ui('返回工作台首頁')} onClick={()=>window.dispatchEvent(new Event('aicg-home-request'))}><span aria-hidden="true">A</span>{ui('AICG 工作台')}</button><span className="desktop-caption" aria-hidden="true"/></header>}<div className="desktop-content">{children}</div></div>;}

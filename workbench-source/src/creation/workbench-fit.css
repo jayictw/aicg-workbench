@@ -1,0 +1,18 @@
+/* g6e1: fit nested outcome cards and media to the existing scrollable column. */
+:root .round1-workbench.wb-workbench{--fit-build:g6e1}
+:root .round1-workbench.wb-workbench .wb-output{container-type:size}
+:root .round1-workbench.wb-workbench .wb-output .outcome-section{min-width:0;max-width:100%}
+/* width:auto accounts for the existing 20px side margins, even when nested. */
+:root .round1-workbench.wb-workbench .wb-output :is(.c-attempt,.wb-candidate,.wb-saved-result){width:auto;min-width:0;max-width:calc(100% - 40px);box-sizing:border-box}
+:root .round1-workbench.wb-workbench .wb-output :is(.b-results,.b-candidates,[data-v-preview-player],.wb-image-preview){min-width:0;box-sizing:border-box}
+:root .round1-workbench.wb-workbench .wb-output .b-results>section{min-width:0;max-width:100%}
+:root .round1-workbench.wb-workbench .wb-output .b-results article{min-width:0;max-width:100%;box-sizing:border-box}
+:root .round1-workbench.wb-workbench .wb-output .v3-player{width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+:root .round1-workbench.wb-workbench .wb-output .v3-player video{display:block;width:auto;max-width:100%;height:auto;max-height:max(60px,calc(100cqh - 120px));margin-inline:auto;aspect-ratio:auto;object-fit:contain}
+:root .round1-workbench.wb-workbench .wb-output .v3-playback{display:flex;align-items:center;flex-wrap:wrap;gap:6px;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+:root .round1-workbench.wb-workbench .wb-output .v3-playback input[type=range]{width:0;min-width:24px;flex:1 1 80px}
+:root .round1-workbench.wb-workbench .wb-output .v3-playback :is(button,span){flex:0 0 auto}
+:root .round1-workbench.wb-workbench .wb-output .v3-playback span{white-space:nowrap}
+:root .round1-workbench.wb-workbench .wb-output :is(h3,p,figcaption,dt,dd,pre,a,summary){overflow-wrap:anywhere}
+:root .round1-workbench.wb-workbench .wb-output .b-actions{max-width:100%;flex-wrap:wrap}
+:root .round1-workbench.wb-workbench .wb-output .b-actions button{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}

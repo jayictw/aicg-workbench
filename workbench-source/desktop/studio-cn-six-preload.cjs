@@ -1,0 +1,1 @@
+const {contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('chinaSix',Object.freeze({status:()=>ipcRenderer.invoke('cn-six:status',{}),preview:caseId=>ipcRenderer.invoke('cn-six:preview',{caseId}),onStatus:fn=>ipcRenderer.on('cn-six:status',(_e,value)=>fn(value))}));

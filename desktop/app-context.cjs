@@ -1,0 +1,17 @@
+'use strict';
+const {error}=require('./media.cjs');
+class AppContext{
+ constructor({getHost,isBlocked=()=>false,clock=Date.now}){this.getHost=getHost;this.isBlocked=isBlocked;this.clock=clock;this.revision=0;this.view='starting';this.projectId=null;this.graphId=null;this.draftBlocked=false;this.waiters=new Map();}
+ report(v){if(!v||Object.keys(v).some(k=>!['view','projectId','graphId','navigationRequestId','navigationBlocked','hasUnsubmittedHomeDraft'].includes(k))||!['home','canvas'].includes(v.view)||!['string','object'].includes(typeof v.projectId)||!['string','object'].includes(typeof v.graphId)||v.projectId!==null&&typeof v.projectId!=='string'||v.graphId!==null&&typeof v.graphId!=='string'||v.navigationRequestId!==null&&typeof v.navigationRequestId!=='string')throw error('APP_CONTEXT_SCHEMA','Invalid rendered application context');
+  if(v.navigationBlocked&&v.navigationRequestId){this.waiters.get(v.navigationRequestId)?.reject(error('APP_GUI_DRAFT_BLOCKED','Unsubmitted GUI content prevents navigation'));return this.read();}
+  const h=this.getHost();if(v.view==='canvas'&&(h.activeProjectId!==v.projectId||h.active()?.graph.graphId!==v.graphId))throw error('APP_CONTEXT_SCOPE','Rendered canvas does not match the active project');
+  const next={view:v.view,projectId:v.view==='canvas'?v.projectId:null,graphId:v.view==='canvas'?v.graphId:null,draftBlocked:!!v.hasUnsubmittedHomeDraft};if(['view','projectId','graphId','draftBlocked'].some(k=>this[k]!==next[k])){Object.assign(this,next);this.revision++;}this.reportedAt=this.clock();
+  if(v.navigationRequestId){const pending=this.waiters.get(v.navigationRequestId);if(pending){if(v.navigationBlocked){pending.reject(error('APP_GUI_DRAFT_BLOCKED','Unsubmitted GUI content prevents navigation'));}else if(pending.view===v.view&&(pending.view==='home'||pending.projectId===v.projectId&&pending.graphId===v.graphId))pending.resolve(this.read());}}
+  return this.read();
+ }
+ read(){const h=this.getHost();return {appContextRevision:this.revision,view:this.view,projectId:this.projectId,graphId:this.graphId,reportedAt:this.reportedAt??null,ready:['home','canvas'].includes(this.view)&&!this.isBlocked(),hasUnsubmittedHomeDraft:this.draftBlocked,workspaceRevision:h.data?.editRevision??null,savedLibraryRevision:h.savedRevision??null,dirty:h.data?h.isDirty():false};}
+ assertRevision(revision){if(revision!==this.revision)throw error('APP_CONTEXT_CONFLICT','Application view changed; read status again');}
+ async navigate(target,send,{requestId,timeoutMs=10000}={}){if(this.isBlocked())throw error('APP_NOT_READY','Application is closing or unavailable');const old=this.waiters.get(requestId);if(old)throw error('APP_NAVIGATION_BUSY','Navigation receipt is still pending');return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{this.waiters.delete(requestId);reject(error('APP_GUI_NOT_READY','Host target is retained, but rendered GUI has not acknowledged it; inspect status before retry'));},timeoutMs);const done=fn=>value=>{clearTimeout(timer);this.waiters.delete(requestId);fn(value);};this.waiters.set(requestId,{...target,resolve:done(resolve),reject:done(reject)});try{send({requestId,...target,appContextRevision:this.revision});}catch(e){this.waiters.get(requestId)?.reject(e);}});}
+ close(){for(const p of [...this.waiters.values()])p.reject(error('APP_SESSION_ENDED','Application closed'));this.waiters.clear();this.view='closed';this.projectId=null;this.graphId=null;this.revision++;}
+}
+module.exports={AppContext};

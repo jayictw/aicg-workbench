@@ -1,0 +1,14 @@
+{
+  "buildId": "20261030-m9-mcp-r2-v6c1",
+  "source": "ARCHIVE_COMPATIBILITY_ONLY",
+  "codeRoot": "workbench-source",
+  "runtimeRoot": "runtime/legacy-compat",
+  "storageMode": "bounded-normal-modes-v2",
+  "runtimeContractVersion": 2,
+  "formalWorkRoot": "runtime/legacy-disabled/work",
+  "formalBackupRoot": "runtime/legacy-disabled/backups",
+  "manualMode": "M9_R2_IMPLEMENTATION",
+  "mediaValidationRuntime": {
+    "python": "tools/python/python.exe"
+  }
+}

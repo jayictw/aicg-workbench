@@ -1,0 +1,14 @@
+import {useState} from 'react'
+import type {ReactNode} from 'react'
+import {Modal} from '../studio/Modal'
+import '../../desktop/confirmation-ui.css'
+export const materialPurpose:Record<string,string>={studio:'摄影棚 · 姿势、构图与机位',character:'人物 · 脸部、服装与外观',product:'产品 · 外形、颜色与细节',scene:'场景 · 环境与背景细节',style:'风格 · 画风、色调与氛围'}
+export const materialSource:Record<string,string>={'local-import':'本机导入','library-reference':'素材库引用','studio-snapshot':'摄影棚快照'}
+export type ReviewImage={referenceId:string;src:string;name:string;category:string;origin:string;sha256:string;purpose?:string}
+export function ReferenceCard({image,index}:{image:ReviewImage;index:number}){
+ const [zoom,setZoom]=useState(false),purpose=materialPurpose[image.origin==='studio-snapshot'?'studio':image.category]||image.category
+ return <><figure className="gc-reference" data-video-actual-reference><button type="button" className="gc-thumbnail" onClick={()=>setZoom(true)} aria-label={`放大查看图像${index+1} ${image.name}`}><img src={image.src} alt={`本次实际送出的参考图 ${index+1}`}/><span>放大查看</span></button><figcaption><strong title={image.name}>图像 {index+1} · {image.name}</strong><small>{purpose}</small></figcaption></figure>{zoom&&<Modal title={`图像 ${index+1} · ${image.name}`} onClose={()=>setZoom(false)} wide><img className="creation-full-reference" src={image.src} alt={image.name}/><p>{purpose} · {materialSource[image.origin]}</p></Modal>}</>
+}
+export function GenerationReview({summary,images,prompt,retained,technical,fee,acknowledgement,actions}:{summary:ReactNode;images:ReviewImage[];prompt:string;retained:string[];technical:ReactNode;fee:ReactNode;acknowledgement?:ReactNode;actions:ReactNode}){
+ return <div className="gc-shell"><div className="gc-scroll"><section className="gc-section"><h3>生成摘要</h3>{summary}</section><section className="gc-section"><h3>实际参考图 <span className="gc-count">{images.length} 张</span></h3><p className="gc-muted">仅发送以下图片，按图序送出；用途为本地使用指引，不保证模型完全遵循。</p><div className="gc-reference-grid">{images.map((r,n)=><ReferenceCard key={r.referenceId} image={r} index={n}/>)}</div>{!images.length&&<p>本次没有参考图，仅发送下方实际提示词。</p>}</section><section className="gc-section"><h3>完整实际提示词</h3><pre className="gc-prompt">{prompt}</pre><p className="gc-muted">以上是全部实际文字，无隐藏附加指令。</p></section>{retained.length>0&&<details className="gc-section" data-video-retained-summary><summary>任务保留，本次不发送（{retained.length}）</summary>{retained.map((name,n)=><p key={n}>{name}</p>)}</details>}<details className="gc-section gc-technical"><summary>技术详情</summary>{technical}{images.map((r,n)=><div key={r.referenceId}><strong>图像 {n+1} · {r.name}</strong><p>API角色：{r.purpose||'image'} · 来源：{materialSource[r.origin]||r.origin}</p><p>SHA256 {r.sha256}</p></div>)}</details></div><footer className="gc-footer"><div className="gc-fee">{fee}</div>{acknowledgement}<div className="gc-actions">{actions}</div></footer></div>
+}

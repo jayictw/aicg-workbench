@@ -1,0 +1,6 @@
+'use strict';const el=id=>document.getElementById(id);const input=el('secret');
+el('issue').onclick=async()=>{try{const r=await window.fakeInput.issue({length:Number(el('length').value)});input.value=r.value;el('submit').disabled=false;el('message').textContent='程序假值已登记（'+r.length+' 字符），可以提交。';input.focus()}catch{input.value='';el('message').textContent='输入权限过期，请取消并重新打开。'}};
+el('submit').onclick=async()=>{let value=input.value;input.value='';try{await window.fakeInput.submit({value});value=undefined}catch{value=undefined;el('message').textContent='拒绝保存：只接受本窗口刚生成的程序假值。请重新生成或取消。'}};
+el('cancel').onclick=()=>{input.value='';window.fakeInput.cancel({})};window.addEventListener('pagehide',()=>{input.value=''});
+
+async function context(){try{const r=await window.fakeInput.context({});if(!r.ready){setTimeout(context,50);return}el('issue').disabled=false;el('binding').replaceChildren();for(const [label,value]of [['服务',r.serviceName],['账户别名',r.accountAlias],['允许主机',r.apiOrigin]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;el('binding').append(dt,dd)}}catch{el('message').textContent='输入上下文已失效，请取消。'}}void context();document.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();input.value='';window.fakeInput.cancel({})}});

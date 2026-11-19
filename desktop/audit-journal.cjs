@@ -1,0 +1,8 @@
+ 'use strict';
+const fs=require('node:fs'),{error}=require('./media.cjs');
+// A record is bounded by the existing graph resource budget. Lifetime history is streamed, never truncated.
+const RECORD_BYTES=8*1024*1024;
+function row(bytes){let value;try{value=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));}catch{throw error('AUDIT_CORRUPT','命令审计中断或损坏，原件保留');}if(!value?.receipt||typeof value.receipt.commandId!=='string')throw error('AUDIT_CORRUPT','命令审计回执缺少身份，原件保留');return value;}
+function readJournal(file,accept){const fd=fs.openSync(file,'r'),chunk=Buffer.alloc(64*1024);let parts=[],size=0;try{for(;;){const count=fs.readSync(fd,chunk);if(!count)break;let start=0;for(let i=0;i<count;i++){if(chunk[i]!==10)continue;const part=Buffer.from(chunk.subarray(start,i));size+=part.length;if(size>RECORD_BYTES)throw error('AUDIT_RECORD_SIZE','单条审计超过8MiB，原件保留');parts.push(part);if(size)accept(row(Buffer.concat(parts,size)));parts=[];size=0;start=i+1;}if(start<count){const part=Buffer.from(chunk.subarray(start,count));size+=part.length;if(size>RECORD_BYTES)throw error('AUDIT_RECORD_SIZE','单条审计超过8MiB，原件保留');parts.push(part);}}if(size)throw error('AUDIT_CORRUPT','审计末条未完整提交，原件保留');}finally{fs.closeSync(fd);}}
+function append(file,receipt,audit){const bytes=Buffer.from(JSON.stringify({receipt,audit}));if(bytes.length>RECORD_BYTES)throw error('AUDIT_RECORD_SIZE','单条审计超过8MiB，未改变原图');row(bytes);const fd=fs.openSync(file,'a+');try{const size=fs.fstatSync(fd).size;if(size){const last=Buffer.alloc(1);fs.readSync(fd,last,0,1,size-1);if(last[0]!==10)throw error('AUDIT_CORRUPT','审计末条中断，未追加或覆盖');}fs.writeFileSync(fd,Buffer.concat([bytes,Buffer.from('\n')]));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}}
+module.exports={readJournal,append,RECORD_BYTES};

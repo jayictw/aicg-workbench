@@ -1,0 +1,5 @@
+'use strict';
+const pm=require('./batch2-policy.cjs'),c=require('./d1-json.cjs');
+function preview(id){const {original,cases}=pm.loadFrozen(),cell=cases.find(x=>x.caseId===id);if(!cell)throw Error('B2_CASE');const built=require('./studio-model.cjs').prepare(cell.packet,original.originalText,cell.taskId,cell.effective.target),body=require('./ark-images-adapter.cjs').body(built.effective,built.base64);if(c.hash(body)!==cell.wireBodySha256)throw Error('B2_INPUT_DRIFT');return {caseId:id,camera:cell.camera,group:cell.group,effective:built.effective,body:JSON.parse(body),wireBodySha256:c.hash(body),url:original.origin+original.endpoint,referenceSha256:cell.referenceSha256,referenceDataUrl:built.base64?'data:image/png;base64,'+built.base64:null}}
+function summary(){const {original,cases}=pm.loadFrozen();return {runId:require('../integration-build.json').buildId,batch:2,service:'火山方舟中国 · 北京',model:original.model,url:original.origin+original.endpoint,maxPosts:11,price:original.price,credentialState:'第二批尚未取得官方请求批准；不读取凭证、不发送',cases:cases.map(x=>({caseId:x.caseId,camera:x.camera,group:x.group,ordinal:x.ordinal}))}}
+module.exports={preview,summary};

@@ -1,0 +1,6 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),c=require('./d1-json.cjs'),pm=require('./studio-six-policy.cjs'),adapter=require('./ark-images-adapter.cjs');
+function load(){const plan=pm.loadPlan();return {plan,tasks:plan.cases}}
+function preview(id){const plan=pm.loadPlan(),cell=plan.cases.find(x=>x.caseId===id);if(!cell)throw Error('SIX_CASE');const built=require('./studio-model.cjs').prepare(cell.packet,plan.originalText,cell.taskId,cell.effective.target),body=adapter.body(built.effective,built.base64);if(c.hash(body)!==cell.wireBodySha256)throw Error('SIX_PREVIEW_CHANGED');return {caseId:id,camera:cell.camera,group:cell.group,effective:built.effective,body:JSON.parse(body),wireBodySha256:c.hash(body),url:built.effective.target.apiOrigin+'/api/v3/images/generations',referenceSha256:cell.referenceSha256,referenceDataUrl:built.base64?'data:image/png;base64,'+built.base64:null}}
+function summary(){const plan=pm.loadPlan();return {runId:plan.runId,service:'火山方舟中国 · 北京',model:plan.model,url:plan.origin+'/api/v3/images/generations',maxPosts:36,price:plan.price,credentialState:'火山凭证仅在新批准后由原生程序原地核验；不读取BytePlus凭证',budgetMinor:null,historicalBytePlus:'旧403记录原位保留，不改写为火山来源',cases:plan.cases.map(x=>({caseId:x.caseId,camera:x.camera,group:x.group}))}}
+module.exports={load,preview,summary};

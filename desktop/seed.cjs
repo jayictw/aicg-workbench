@@ -1,0 +1,1 @@
+module.exports=require('./seed-v4.cjs');

@@ -1,0 +1,5 @@
+'use strict';
+const {error}=require('../media.cjs');const issued=new WeakSet(),used=new WeakSet();
+function ticket({host,pid,startedAt,clock=Date.now}){if(!host.invitation||host.state!=='waiting-client'||!Number.isInteger(pid)||pid<1||typeof startedAt!=='string')throw error('MCP_NATIVE_SESSION_IDENTITY','缺少本次新Codex程序身分');const value=Object.freeze({invitationId:host.invitation.invitationId,projectId:host.broker.s.graph.projectId,graphId:host.broker.s.graph.graphId,pid,startedAt,expiresAt:Math.min(host.invitation.expiresAt,clock()+7200000)});issued.add(value);return value;}
+function consume(value,{host,peer,identity,clock=Date.now}){if(!issued.has(value)||used.has(value))throw error('MCP_NATIVE_SESSION_IDENTITY','委派已使用或不存在');used.add(value);if(!value||value.expiresAt<=clock()||value.invitationId!==host.invitation?.invitationId||value.projectId!==host.broker.s.graph.projectId||value.graphId!==host.broker.s.graph.graphId||value.pid!==peer.clientPid||identity.state!=='alive'||identity.startedAt!==value.startedAt)throw error('MCP_NATIVE_SESSION_IDENTITY','本次短效委派與新Codex程序不符；沒有自動授權');return {proposalPermission:true};}
+module.exports={ticket,consume};

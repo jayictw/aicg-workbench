@@ -1,0 +1,23 @@
+/* Existing emerald tokens, original R6 frame and manual-save contract. */
+.creation-material-actions{display:flex;align-items:center;gap:8px}
+.round1-workbench.wb-workbench button.creation-material-entry{display:flex;align-items:center;gap:7px;min-height:42px;padding:8px 12px;border:1px solid var(--control-border);background:var(--surface);color:var(--ink);font-size:13px;font-weight:600;white-space:nowrap}
+.round1-workbench .creation-heading-actions{gap:8px}
+.round1-workbench .creation-environment{display:none}
+.round1-workbench .creation-references{margin:0 0 14px}
+.creation-ref-hint{font-size:12px;color:var(--muted);margin:4px 0}
+.creation-reference-list{display:flex;flex-direction:column;gap:8px}
+.creation-reference-row{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);background:var(--surface-raised);padding:8px;border-radius:8px;min-width:0}
+.round1-workbench.wb-workbench .creation-reference-row>button{padding:0;min-height:52px;flex:none}
+.creation-reference-row img{display:block;object-fit:contain}
+.creation-reference-caption{min-width:0;flex:1;font-size:12px}
+.creation-reference-caption strong{display:block;overflow-wrap:anywhere}
+.creation-reference-caption small{display:block;color:var(--muted);overflow-wrap:anywhere}
+.creation-reference-caption label{display:flex;align-items:center;gap:8px;margin:4px 0}
+.round1-workbench.wb-workbench .creation-reference-caption select{width:auto;min-height:28px;font-size:12px;padding:2px 6px}
+.creation-reference-actions{display:flex;flex-wrap:wrap;gap:5px}
+.round1-workbench.wb-workbench .creation-reference-actions button{padding:3px 6px;min-height:28px;font-size:12px}
+.round1-workbench.wb-workbench .original-generate-footer [role=alert]{color:var(--danger-ink);font-weight:600}
+.round1-workbench [data-reference-status]{font-size:12px;color:var(--danger-ink)}
+@media(max-width:1050px){.round1-workbench .m2-page-title .m2-pill{display:none}.round1-workbench.wb-workbench button.creation-material-entry{padding:6px 8px}}
+@media(max-width:720px){.round1-workbench .creation-heading-actions{flex-wrap:wrap}.creation-material-actions{flex-wrap:wrap}.round1-workbench.wb-workbench .creation-heading{align-items:flex-start}.round1-workbench .creation-save-note{flex-wrap:wrap}.round1-workbench.wb-workbench .creation-save-actions>span{margin-left:0}.round1-workbench .m2-page-title h1{font-size:20px}}
+.creation-reference-categories{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}.round1-workbench.wb-workbench .creation-reference-categories button{font-size:12px;padding:4px 8px;min-height:28px}

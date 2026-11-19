@@ -1,0 +1,6 @@
+import {ui,useUiLocale,uiDetails,sanitizeUiDetails} from '../shared/ui-locale.mjs';
+import React from 'react';
+type Any=Record<string,any>;
+export function FrozenSources({rows,onOpen}:{rows:Any[];onOpen:(id:string,project:string)=>void}){useUiLocale(React);
+ return <><p>{ui("分鏡助手與攝影棚的已保存凍結來源，直接回到同一畫布接續。保留來源身份、版本與用途；不改寫原分鏡或棚場景。")}</p>{!rows.length&&<p>{ui("目前尚無凍結來源。可在「項目」匯入已保存工作台的完整備份副本；原庫保持不變。")}</p>}<div className="workspace-list">{rows.map(r=><article key={r.id} className="frozen-source"><b>{r.kind==='storyboard' ? ui("分鏡助手") : ui("攝影棚 PNG")} · {r.name}</b><p>{r.lineageMismatch&&<strong>{ui("來源已換版：下列為歷史來源，不代表目前媒體。")+" "}</strong>}{(r.boardName??r.humanCode)} · {r.kind==='storyboard' ? (ui("鏡頭版本")+" "+r.source.shotRevision) : (r.source?.kind==='local-studio-export' ? (ui("本地棚場景 v")+r.source.sceneRevision) : (ui("固定輸出")+" "+((r.source?.outputId??ui("來源待核對")))))}</p>{r.mediaVersionId&&<small>{ui("固定媒體")+" "}{r.mediaVersionId}<br/>SHA256 {r.sha256}</small>}<button onClick={()=>onOpen(r.nodeId,r.projectId)}>{ui("在同一畫布接續 ·")+" "}{r.humanCode}</button><details><summary>{ui("來源、版本與用途")}</summary><pre>{sanitizeUiDetails({source:r.source,mediaVersionId:r.mediaVersionId,sha256:r.sha256,unmappedInputs:r.unmappedInputs})}</pre><small>{ui("離線來源演練會明示；未映射輸入不會暗中當作已接入。")}</small></details></article>)}</div></>;
+}

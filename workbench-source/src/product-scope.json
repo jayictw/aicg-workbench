@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "services": ["ark-cn"],
+  "models": ["ark-flash", "ark-seedance-25"],
+  "unavailable": "本版本尚未开放"
+}

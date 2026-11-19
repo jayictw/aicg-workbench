@@ -1,0 +1,3796 @@
+[
+  {
+    "id": "BP.V",
+    "label": "BytePlus ModelArk · 视频",
+    "providerName": "BytePlus ModelArk",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://ark.ap-southeast.bytepluses.com/api/v3",
+    "protocolId": "p1-01-BP.V",
+    "protocolVersion": "v3",
+    "region": "ap-southeast-1",
+    "authType": "BEARER",
+    "path": "/contents/generations/tasks",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC / POST /contents/generations/tasks\n认证参考：Authorization: Bearer <API key>",
+    "notes": "ap-southeast-1；公开 API 文档；须开通对应模型。2.0/2.5 激活页列余额/资源包条件；USD30 为文档推荐项，不改写为所有账户硬性门槛。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "BP.CREATE",
+        "url": "https://docs.byteplus.com/en/docs/modelark/create-video-generation-task-api?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "BP.GET",
+        "url": "https://docs.byteplus.com/en/docs/modelark/get-video-generation-task-api?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "BP.MODELS",
+        "url": "https://docs.byteplus.com/en/docs/modelark/model-list?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "BP.ERROR",
+        "url": "https://docs.byteplus.com/en/docs/modelark/error-codes?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "dreamina-seedance-2-5-260628",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–30s",
+        "resolution": "480p/720p/1080p；1080p10bit",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "dreamina-seedance-2-0-260128",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480p/720p/1080p/4K；4K10bit",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "dreamina-seedance-2-0-fast-260128",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480p/720p",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "dreamina-seedance-2-0-mini-260615",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480p/720p",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedance-1-0-pro-250528",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "NO"
+        },
+        "duration": "2–12s",
+        "resolution": "480p/720p/1080p",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedance-1-0-pro-fast-251015",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "NO",
+          "multi_reference_images": "NO"
+        },
+        "duration": "2–12s",
+        "resolution": "480p/720p/1080p",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedance-1-5-pro-251215",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "UNKNOWN：模型列表R2V列与create章节需进一步对齐"
+        },
+        "duration": "4–12s",
+        "resolution": "480p/720p/1080p",
+        "source_ids": [
+          "BP.MODELS",
+          "BP.CREATE",
+          "BP.GET"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "BP.I",
+    "label": "BytePlus ModelArk · 图片",
+    "providerName": "BytePlus ModelArk",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://ark.ap-southeast.bytepluses.com/api/v3",
+    "protocolId": "p1-01-BP.I",
+    "protocolVersion": "v3",
+    "region": "ap-southeast-1",
+    "authType": "BEARER",
+    "path": "/images/generations",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "同步图片响应；部分模型支持 stream SSE；不是视频 task API\n认证参考：Authorization: Bearer <API key>",
+    "notes": "ap-southeast-1；仅 seedream-5-0-lite 在本次表中另列 eu-west-1 / https://ark.eu-west.bytepluses.com/api/v3；公开 API 文档；模型激活、配额和具体账户 Endpoint ID 未验证",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "BP.IMAGE",
+        "url": "https://docs.byteplus.com/en/docs/modelark/image-generation-api?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "BP.MODELS",
+        "url": "https://docs.byteplus.com/en/docs/modelark/model-list?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "BP.ERROR",
+        "url": "https://docs.byteplus.com/en/docs/modelark/error-codes?redirect=1",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "dola-seedream-5-0-pro-260628",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1K/1.5K/2K",
+        "source_ids": [
+          "BP.IMAGE",
+          "BP.MODELS"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "dola-seedream-5-0-flash-260915",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1K/1.5K/2K",
+        "source_ids": [
+          "BP.IMAGE",
+          "BP.MODELS"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedream-5-0-260128",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN：API正文以lite命名，精确映射待核",
+        "source_ids": [
+          "BP.IMAGE",
+          "BP.MODELS"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedream-5-0-lite-260128",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "2K/3K/4K",
+        "source_ids": [
+          "BP.IMAGE",
+          "BP.MODELS"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedream-4-5-251128",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "2K/4K",
+        "source_ids": [
+          "BP.IMAGE",
+          "BP.MODELS"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "seedream-4-0-250828",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1K/2K/4K",
+        "source_ids": [
+          "BP.IMAGE",
+          "BP.MODELS"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "G.I",
+    "label": "Google Gemini · 图片",
+    "providerName": "Google Gemini",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+    "protocolId": "p1-01-G.I",
+    "protocolVersion": "v1beta",
+    "region": "UNKNOWN",
+    "authType": "HEADER_KEY",
+    "path": "/interactions",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /interactions; x-goog-api-key",
+    "notes": "Gemini Interactions 图片配置；未知模型能力不自动启用。 保存不联网，真实调用尚未适配。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "G-IMG",
+        "url": "https://aistudio.google.com/docs/image-generation",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "1953ea903ec9b3c37d3163400c5eb95c3d418cc696578ebbd8943be096e428b2",
+        "raw": "sources/G-IMG.raw"
+      },
+      {
+        "id": "G-CREATE",
+        "url": "https://aistudio.google.com/api-reference/interactions-api/create-interaction.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "d6d6b56589a0cf10c5175e543925e22641ec657ad5e5988b4f60522fbec48bd4",
+        "raw": "sources/G-CREATE.raw"
+      },
+      {
+        "id": "G-GET",
+        "url": "https://aistudio.google.com/api-reference/interactions-api/get-interaction-by-id.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "00854f1cbf4ead12cc2fa135390258fa2927a34ebe92b9a97df22924f594780a",
+        "raw": "sources/G-GET.raw"
+      },
+      {
+        "id": "G-ERRORS",
+        "url": "https://aistudio.google.com/docs/api-errors.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "497f4568399485f609cff5a7b4604b4107a3a46fb67546336171a185610f239c",
+        "raw": "sources/G-ERRORS.raw"
+      },
+      {
+        "id": "G-OVERVIEW",
+        "url": "https://aistudio.google.com/api-reference.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "1cc411951b3d4e4eaa06d31cfec6960ec26541f3174e4bda20055252389be857",
+        "raw": "sources/G-OVERVIEW.raw"
+      },
+      {
+        "id": "G-AUTH",
+        "url": "https://aistudio.google.com/docs/api-key",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "e95e51e605ad6360deb5588657c6e794d5e89a05c6435dec82a983747af5f619",
+        "raw": "sources/G-AUTH.raw"
+      },
+      {
+        "id": "G-REVISION",
+        "url": "https://aistudio.google.com/docs/interactions-breaking-changes-may-2026.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "85a752b9e4d9edc96a53f106b9248d2d65a740a45f5a721cacf26f3f6da1825d",
+        "raw": "sources/G-REVISION.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "gemini-nano-banana-2.1",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1K/2K/4K；不支持0.5K",
+        "source_ids": [
+          "G.NB21",
+          "G.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gemini-3.1-flash-image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "0.5K/1K/2K/4K",
+        "source_ids": [
+          "G.FLASH",
+          "G.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gemini-3-pro-image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1K/2K/4K",
+        "source_ids": [
+          "G.PRO",
+          "G.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gemini-3.1-flash-lite-image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "UNKNOWN"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1K",
+        "source_ids": [
+          "G.LITE",
+          "G.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gemini-2.5-flash-image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN：精确逐比例尺寸未核",
+        "source_ids": [
+          "G.25",
+          "G.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "Gemini Interactions 图片配置；未知模型能力不自动启用。",
+      "reason": "",
+      "gaps": []
+    },
+    "officialApi": {
+      "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+      "submit": "POST /interactions",
+      "authentication": {
+        "type": "HEADER_KEY",
+        "header": "x-goog-api-key",
+        "requiredHeaders": {
+          "Content-Type": "application/json"
+        },
+        "secretValue": "NOT_PROVIDED",
+        "optionalHeaders": {
+          "Api-Revision": "2026-05-20 (historical migration example; current docs say header ignored after June 8)"
+        }
+      },
+      "modelSelection": "body.model = exact user model ID; no name inference or model whitelist",
+      "regionProject": "No Region/Project field in request URL. API key belongs to a Google project; this is Gemini API authentication, not Cloud OAuth.",
+      "submission": "Unary JSON; optional stream SSE; background/store options are API-specific, not enabled generation features.",
+      "queryResult": "GET /interactions/{id} for stored interactions; inspect steps[].content for typed image content and base64/MIME. No automatic retry.",
+      "parametersCapabilities": "input; response_format image; generation_config image settings. Official image guide describes text/image inputs, editing and model-specific size/aspect settings. Unknown custom IDs retain UNKNOWN capabilities.",
+      "errors": "HTTP status plus error.code/error.message; SSE error event_type=error. Image safety and no_image are separate codes.",
+      "requestId": "Interactions ID is documented; separate correlation header UNKNOWN in reviewed sources.",
+      "limitsVersions": "Interactions is current default; generateContent is legacy and has a different schema/path. Current model examples include gemini-nano-banana-2.1; this is a reference, not an allowlist. May 2026 migration examples use Api-Revision 2026-05-20; official migration page says the legacy schema was removed June 8 and the header is now ignored. Use current steps/content schema, not legacy outputs."
+    }
+  },
+  {
+    "id": "G.O",
+    "label": "Google Gemini Omni · 视频（非 Veo）",
+    "providerName": "Google Gemini",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+    "protocolId": "p1-01-G.O",
+    "protocolVersion": "v1beta",
+    "region": "UNKNOWN",
+    "authType": "HEADER_KEY",
+    "path": "/interactions",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /interactions; x-goog-api-key",
+    "notes": "仅 Gemini Omni 视频配置。Gemini API 的 Veo 3.1 预览已停用；Cloud Veo 属于另一平台。 保存不联网，真实调用尚未适配。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "G-VIDEO-CURRENT",
+        "url": "https://aistudio.google.com/docs/video",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "7d0c20e63af94fe0989cf08676ac13d7bb04cce066fc72da3d2fb13a7eea41a7",
+        "raw": "sources/G-VIDEO-CURRENT.raw"
+      },
+      {
+        "id": "G-OMNI",
+        "url": "https://aistudio.google.com/docs/omni",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "50258e99b261975cfce82f6a35a8cda41b2ed93b795c05ac726c4220db0cc401",
+        "raw": "sources/G-OMNI.raw"
+      },
+      {
+        "id": "G-CREATE",
+        "url": "https://aistudio.google.com/api-reference/interactions-api/create-interaction.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "d6d6b56589a0cf10c5175e543925e22641ec657ad5e5988b4f60522fbec48bd4",
+        "raw": "sources/G-CREATE.raw"
+      },
+      {
+        "id": "G-GET",
+        "url": "https://aistudio.google.com/api-reference/interactions-api/get-interaction-by-id.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "00854f1cbf4ead12cc2fa135390258fa2927a34ebe92b9a97df22924f594780a",
+        "raw": "sources/G-GET.raw"
+      },
+      {
+        "id": "G-ERRORS",
+        "url": "https://aistudio.google.com/docs/api-errors.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "497f4568399485f609cff5a7b4604b4107a3a46fb67546336171a185610f239c",
+        "raw": "sources/G-ERRORS.raw"
+      },
+      {
+        "id": "G-OVERVIEW",
+        "url": "https://aistudio.google.com/api-reference.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "1cc411951b3d4e4eaa06d31cfec6960ec26541f3174e4bda20055252389be857",
+        "raw": "sources/G-OVERVIEW.raw"
+      },
+      {
+        "id": "G-REVISION",
+        "url": "https://aistudio.google.com/docs/interactions-breaking-changes-may-2026.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "85a752b9e4d9edc96a53f106b9248d2d65a740a45f5a721cacf26f3f6da1825d",
+        "raw": "sources/G-REVISION.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "gemini-omni-1.2-flash",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES：精确anchor语义须按task参数核实",
+          "first_last_frame": "YES：3–10s",
+          "multi_reference_images": "YES"
+        },
+        "duration": "3–15整数秒；首尾插值3–10s；延长每轮3–10s/总≤30s",
+        "resolution": "360p/720p；1080p/4k为upscaled",
+        "source_ids": [
+          "G.OMNI",
+          "G.VIDEO"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "veo-3.1-generate-preview",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：已关闭",
+          "first_frame": "NO：已关闭",
+          "first_last_frame": "NO：已关闭",
+          "multi_reference_images": "NO：已关闭"
+        },
+        "duration": "UNKNOWN",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "G.VIDEO"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "仅 Gemini Omni 视频配置。Gemini API 的 Veo 3.1 预览已停用；Cloud Veo 属于另一平台。",
+      "reason": "",
+      "gaps": []
+    },
+    "officialApi": {
+      "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+      "submit": "POST /interactions",
+      "authentication": {
+        "type": "HEADER_KEY",
+        "header": "x-goog-api-key",
+        "requiredHeaders": {
+          "Content-Type": "application/json"
+        },
+        "secretValue": "NOT_PROVIDED",
+        "optionalHeaders": {
+          "Api-Revision": "2026-05-20 (historical migration example; current docs say header ignored after June 8)"
+        }
+      },
+      "modelSelection": "body.model = exact user model ID; current video reference gemini-omni-1.2-flash",
+      "regionProject": "No Region/Project URL fields; Gemini API key, never substitute Google Cloud OAuth.",
+      "submission": "Unary or SSE; asynchronous background interaction and file processing are distinct states.",
+      "queryResult": "GET /interactions/{id}; video content may be inline or file URI; documented Files GET /files/{id} and /files/{id}:download?alt=media require future safe download/auth implementation.",
+      "parametersCapabilities": "input, response_format type=video, video_config duration/resolution/aspect settings. Omni guide documents 3–15s and up to six references for named models; no capability copied to arbitrary IDs.",
+      "errors": "Interactions error.code/message and SSE error events; invalid duration can return invalid_request.",
+      "requestId": "Interaction/file IDs documented; separate HTTP request correlation header UNKNOWN.",
+      "limitsVersions": "IMPORTANT: official video page says Gemini API Veo 3.1 previews shut down 2026-10-22. This menu profile is Omni, not an operational Veo route. Cloud Veo is a separate row. May 2026 migration examples use Api-Revision 2026-05-20; official migration page says the legacy schema was removed June 8 and the header is now ignored. Use current steps/content schema, not legacy outputs."
+    }
+  },
+  {
+    "id": "G.C",
+    "label": "Google Veo Cloud · 视频",
+    "providerName": "Google Veo Cloud",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://us-central1-aiplatform.googleapis.com/v1",
+    "protocolId": "p1-01-G.C",
+    "protocolVersion": "v1",
+    "region": "us-central1",
+    "authType": "OAUTH",
+    "path": "",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [
+      "project"
+    ],
+    "regionOptions": [],
+    "requestMapping": "POST /projects/{project}/locations/us-central1/publishers/google/models/{model}:predictLongRunning; Authorization: Bearer <Google Cloud access token>",
+    "notes": "Closed; research complete to stated UNKNOWNs, configuration contract cannot represent executable mapping. 保存不联网，真实调用尚未适配。Cloud Veo 需要项目、地区和模型路径，以及尚未接入的 OAuth／长任务协议；当前路径合同不支持冒号操作。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "G-VEO",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "341cd6e2d8ed4139a38136b5d8bbd85a068db7fcf38eeae4feb93ec5fc4c2d49",
+        "raw": "sources/G-VEO.raw"
+      },
+      {
+        "id": "GC-TEXT",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/video/generate-videos-from-text.md.txt",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "35c39f43e1794d197c5912b98aa0ff46246dca450bdf1a01fadc6c4e618cb72a",
+        "raw": "sources/GC-TEXT.raw"
+      },
+      {
+        "id": "GC-AUTH",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/gcp-auth",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "821ea3fad79659784c7e997ee6b9efe436a527988e3a4ec14bb71303d37bdefc",
+        "raw": "sources/GC-AUTH.raw"
+      },
+      {
+        "id": "G-VREF",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/video/generate-videos-from-references",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "79bedd201932ceaaeaa68b232ccc901c051890bb32e1e1edab0868e86160b74a",
+        "raw": "sources/G-VREF.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "veo-3.1-generate-001",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES：资产参考；精确张数 UNKNOWN"
+        },
+        "duration": "4/6/8s；Generate参考图模式仅8s；Fast参考模式时长组合 UNKNOWN",
+        "resolution": "720p/1080p；4K为UNKNOWN：模型卡与REST教程限制冲突",
+        "source_ids": [
+          "G.VEO",
+          "G.VREF"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "veo-3.1-fast-generate-001",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES：资产参考；精确张数 UNKNOWN"
+        },
+        "duration": "4/6/8s；Generate参考图模式仅8s；Fast参考模式时长组合 UNKNOWN",
+        "resolution": "720p/1080p",
+        "source_ids": [
+          "G.VEO",
+          "G.VREF"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "veo-3.1-lite-generate-001",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "UNKNOWN：同页Modalities写Image不支持，Capabilities却写I2V支持",
+          "first_last_frame": "UNKNOWN：同页冲突",
+          "multi_reference_images": "NO：asset references明确不支持"
+        },
+        "duration": "4/6/8s",
+        "resolution": "720p/1080p",
+        "source_ids": [
+          "G.VEO"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "PARTIAL",
+      "scope": "Closed; research complete to stated UNKNOWNs, configuration contract cannot represent executable mapping.",
+      "reason": "Cloud Veo 需要项目、地区和模型路径，以及尚未接入的 OAuth／长任务协议；当前路径合同不支持冒号操作。",
+      "gaps": [
+        "Existing safePath forbids colon in :predictLongRunning/:fetchPredictOperation.",
+        "Existing Mock resolver requires body.model; Veo selects model/project/location in path.",
+        "Project/location plus OAuth credential lifecycle and polling/result mapping need a separately authorized protocol task."
+      ]
+    },
+    "officialApi": {
+      "baseUrl": "https://us-central1-aiplatform.googleapis.com/v1",
+      "submit": "POST /projects/{project}/locations/us-central1/publishers/google/models/{model}:predictLongRunning",
+      "authentication": {
+        "type": "OAUTH",
+        "header": "Authorization: Bearer <Google Cloud access token>",
+        "requiredHeaders": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "Model resource in URL. GA examples veo-3.1-generate-001 and veo-3.1-fast-generate-001; do not use a Gemini API preview ID.",
+      "regionProject": "Project ID and location required; reviewed Veo model region us-central1. Billing/API enablement/IAM and model access are account-specific and NOT_RUN.",
+      "submission": "Asynchronous predictLongRunning; newer Cloud interactions documentation for Omni must not replace this Veo protocol.",
+      "queryResult": "POST same model resource :fetchPredictOperation with operationName. Returned done/error/response; output video bytes or storage URI per request. Poll original operation only.",
+      "parametersCapabilities": "instances[].prompt/image, parameters such as sampleCount, durationSeconds, aspectRatio, resolution, generateAudio, storageUri, with per-model constraints. Reference-image variants have separate limits.",
+      "errors": "Cloud operation error and HTTP JSON error; exact Veo error detail variants UNKNOWN. No real request made.",
+      "requestId": "Full operationName documented; dedicated request ID header UNKNOWN.",
+      "limitsVersions": "Cloud URLs now redirect under Gemini Enterprise Agent Platform; original regional Veo REST example retained. Do not mix API-key examples for Cloud Omni with the OAuth Veo example."
+    }
+  },
+  {
+    "id": "O.I",
+    "label": "OpenAI Images · 图片",
+    "providerName": "OpenAI Images",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.openai.com/v1",
+    "protocolId": "p1-01-O.I",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/images/generations",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /images/generations 或 /images/edits；同步或stream SSE；本卡不含Responses工具路线\n认证参考：Authorization: Bearer <API key>",
+    "notes": "UNKNOWN：地区资格/数据区域/项目routing本轮未核；公开API；账户tier/组织验证/项目模型授权 UNKNOWN；GIF/SVG等预览另需权限",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "O.GEN",
+        "url": "https://developers.openai.com/api/reference/resources/images/methods/generate.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "O.EDIT",
+        "url": "https://developers.openai.com/api/reference/resources/images/methods/edit.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "O.GUIDE",
+        "url": "https://developers.openai.com/api/docs/guides/image-generation.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "O.TRACE",
+        "url": "https://developers.openai.com/api/reference/overview.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "gpt-image-1-mini",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-1.5",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-2",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-2.5-sunburst",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-2.5-flare",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-2.6-sunburst",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE",
+          "O.26S"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-2.6-flare",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见size_pixels；格式png/webp/jpeg；SVG/GIF权限独立",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT",
+          "O.GUIDE",
+          "O.26F"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gpt-image-1",
+        "modes": {
+          "text_to_image": "NO：已关闭",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：已关闭"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "O.GEN",
+          "O.EDIT"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "X.I",
+    "label": "xAI Imagine · 图片",
+    "providerName": "xAI Imagine",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.x.ai/v1",
+    "protocolId": "p1-01-X.I",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/images/generations",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "同步；可deferred=true异步（仅url输出）\n认证参考：Authorization: Bearer <API key>",
+    "notes": "UNKNOWN：已读通用路由不构成数据区域承诺；公开API文档；账户额度/模型授权 UNKNOWN",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "X.IMG",
+        "url": "https://docs.x.ai/developers/model-capabilities/images/generation",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "X.EDIT",
+        "url": "https://docs.x.ai/developers/model-capabilities/images/editing",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "X.MULTI",
+        "url": "https://docs.x.ai/developers/model-capabilities/images/multi-image-editing",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "grok-imagine-image-2.0",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1k / 2k",
+        "source_ids": [
+          "X.IMG",
+          "X.EDIT",
+          "X.MULTI"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "b05Adaptation": {
+      "revision": "B05-1",
+      "checkedDate": "2026-11-11",
+      "scope": "Exact four approved IDs; derived runtime capabilities only. Original research matrix provenance retained.",
+      "realAPI": "NOT_RUN",
+      "accountEntitlement": "UNKNOWN",
+      "fifthModeUI": "DEFERRED_TO_P2-01",
+      "sources": [
+        "https://docs.x.ai/developers/model-capabilities/video/overview",
+        "https://docs.x.ai/developers/model-capabilities/video/editing"
+      ]
+    }
+  },
+  {
+    "id": "X.V",
+    "label": "xAI Imagine · 视频",
+    "providerName": "xAI Imagine",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.x.ai/v1",
+    "protocolId": "p1-01-X.V",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/videos/generations",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC POST /videos/generations\n认证参考：Authorization: Bearer <API key>",
+    "notes": "UNKNOWN：通用API路由与数据驻留独立；公开API文档；实际账户权限 UNKNOWN",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "X.VIDEO",
+        "url": "https://docs.x.ai/developers/model-capabilities/video/generation",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "X.REF",
+        "url": "https://docs.x.ai/developers/model-capabilities/video/reference-to-video",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "grok-imagine-video-1.5",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES",
+          "reference_video_generation": "UNKNOWN：通用参考影片生成未证实；不以编辑或延长替代"
+        },
+        "duration": "1–15s；classic R2V≤10s",
+        "resolution": "T2V/I2V1080p原生；R2V≤720p",
+        "source_ids": [
+          "X.VIDEO",
+          "X.REF"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。",
+        "video_edit": "NO：官方能力表不支持"
+      },
+      {
+        "canonical_model_or_route": "grok-imagine-video-1.5-lite",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "NO：官方能力表不支持",
+          "multi_reference_images": "NO：官方能力表不支持",
+          "reference_video_generation": "UNKNOWN：通用参考影片生成未证实；不以编辑或延长替代"
+        },
+        "duration": "1–15s；classic R2V≤10s",
+        "resolution": "T2V/I2V1080p由720p放大",
+        "source_ids": [
+          "X.VIDEO",
+          "X.REF"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。",
+        "video_edit": "NO：官方能力表不支持"
+      },
+      {
+        "canonical_model_or_route": "grok-imagine-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "NO：文档明确拒绝last_frame/keyframes",
+          "multi_reference_images": "YES",
+          "reference_video_generation": "UNKNOWN：通用参考影片生成未证实；不以编辑或延长替代"
+        },
+        "duration": "1–15s；classic R2V≤10s",
+        "resolution": "≤720p",
+        "source_ids": [
+          "X.VIDEO",
+          "X.REF"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。",
+        "video_edit": "独立 /videos/edits；本批不开放"
+      }
+    ],
+    "b05Adaptation": {
+      "revision": "B05-1",
+      "checkedDate": "2026-11-11",
+      "scope": "Exact four approved IDs; derived runtime capabilities only. Original research matrix provenance retained.",
+      "realAPI": "NOT_RUN",
+      "accountEntitlement": "UNKNOWN",
+      "fifthModeUI": "DEFERRED_TO_P2-01",
+      "sources": [
+        "https://docs.x.ai/developers/model-capabilities/video/overview",
+        "https://docs.x.ai/developers/model-capabilities/video/editing"
+      ]
+    }
+  },
+  {
+    "id": "A.V",
+    "label": "Alibaba Cloud Wan · 视频",
+    "providerName": "Alibaba Cloud Wan",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://{WorkspaceId}.{region}.maas.aliyuncs.com/api/v1",
+    "protocolId": "p1-01-A.V",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/services/aigc/video-generation/video-synthesis",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [
+      "workspace",
+      "region"
+    ],
+    "regionOptions": [
+      "ap-southeast-1",
+      "cn-beijing",
+      "us-east-1",
+      "ap-northeast-1",
+      "eu-central-1",
+      "cn-hongkong"
+    ],
+    "requestMapping": "ASYNC POST /services/aigc/video-generation/video-synthesis\n认证参考：Authorization: Bearer <region API key> ; X-DashScope-Async: enable",
+    "notes": "model、Endpoint、Key必须同region；3.0文档列ap-southeast-1/cn-beijing/us-east-1/ap-northeast-1/eu-central-1/cn-hongkong；2.7本次仅确认Singapore/Beijing；公开API文档；账户/区域模型可见性 UNKNOWN；3.0为preview，不能因有文档就声称已开通",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "A.V3",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-api-reference/",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "A.T2V",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/text-to-video-api-reference",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "A.I2V",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/image-to-video-general-api-reference",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "A.R2V",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/wan-video-to-video-api-reference",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "A.OLDI",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/image-to-video-api-reference",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "wan3.0-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "2–30s；smart duration精确取值 UNKNOWN",
+        "resolution": "480P/720P/1080P；30fps；MP4",
+        "source_ids": [
+          "A.V3"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "wan3.0-video-prime",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "2–30s；smart duration精确取值 UNKNOWN",
+        "resolution": "480P/720P/1080P；30fps；MP4",
+        "source_ids": [
+          "A.V3"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "wan2.7-t2v / wan2.7-t2v-2026-06-12",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "NO：本卡T2V路线",
+          "first_last_frame": "NO：本卡T2V路线",
+          "multi_reference_images": "NO：本卡T2V路线"
+        },
+        "duration": "2–15s",
+        "resolution": "720P/1080P；30fps；MP4",
+        "source_ids": [
+          "A.T2V"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "wan2.7-i2v / wan2.7-i2v-2026-04-25",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：本卡I2V路线",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "NO：只允许first_frame/last_frame/driving_audio/first_clip的指定组合"
+        },
+        "duration": "2–15s",
+        "resolution": "720P/1080P；30fps",
+        "source_ids": [
+          "A.I2V"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "wan2.7-r2v / wan2.7-r2v-2026-06-12",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：本卡需media",
+          "first_frame": "UNKNOWN：须确认本API first_frame组合",
+          "first_last_frame": "UNKNOWN",
+          "multi_reference_images": "YES"
+        },
+        "duration": "2–10s（模型目录/教程）；具体组合 UNKNOWN",
+        "resolution": "720P/1080P",
+        "source_ids": [
+          "A.R2V"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "wan2.6-i2v-flash",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：该I2V路线",
+          "first_frame": "YES",
+          "first_last_frame": "NO：旧first-frame API明确仅首帧",
+          "multi_reference_images": "NO：旧first-frame路线"
+        },
+        "duration": "UNKNOWN：旧模型组合未逐项提取",
+        "resolution": "720P/1080P",
+        "source_ids": [
+          "A.OLDI"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "A.I",
+    "label": "Alibaba Cloud Wan · 图片",
+    "providerName": "Alibaba Cloud Wan",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://{WorkspaceId}.{region}.maas.aliyuncs.com/api/v1",
+    "protocolId": "p1-01-A.I",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/services/aigc/multimodal-generation/generation",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [
+      "workspace",
+      "region"
+    ],
+    "regionOptions": [
+      "ap-southeast-1",
+      "cn-beijing"
+    ],
+    "requestMapping": "同步 POST /services/aigc/multimodal-generation/generation；异步路线需单独读字段\n认证参考：Authorization: Bearer <region API key>",
+    "notes": "Singapore / Beijing；实际模型地区资格 UNKNOWN；公开API文档；region Key互不通用；账户权限未验证",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "A.IMG",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/wan-image-generation-and-editing-api-reference",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "wan2.7-image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN：不可继承Pro4K",
+        "source_ids": [
+          "A.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "wan2.7-image-pro",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "Pro T2I可4K；编辑/图集≤2K",
+        "source_ids": [
+          "A.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "K",
+    "label": "Kling 3.0 · 视频 / 图片",
+    "providerName": "Kling",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api-singapore.klingai.com",
+    "protocolId": "p1-01-K",
+    "protocolVersion": "3.0",
+    "region": "singapore",
+    "authType": "BEARER",
+    "path": "/text-to-video/kling-3.0",
+    "mediaKinds": [
+      "VIDEO",
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "VIDEO: new per-model paths / contents / settings; IMAGE: legacy model_name kling-v3; response envelopes strictly separate",
+    "notes": "B06: 视频文生/首帧/首尾；图像单输出/单参考。4.0、Flash、Omni、多图影片、V2V 不开放。真实 API/权限未验证。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "K-B06-0",
+        "url": "https://kling.ai/document-api/api/get-started/authentication",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      },
+      {
+        "id": "K-B06-1",
+        "url": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      },
+      {
+        "id": "K-B06-2",
+        "url": "https://kling.ai/document-api/apiReference/model/imageToVideo",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      },
+      {
+        "id": "K-B06-3",
+        "url": "https://kling.ai/document-api/api/image/3-0-omni",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      },
+      {
+        "id": "K-B06-4",
+        "url": "https://kling.ai/document-api/api/get-started/error-codes",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "DOCUMENTED_SUBSET",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "kling-3.0",
+        "mediaKind": "VIDEO",
+        "modes": [
+          "TEXT_TO_VIDEO",
+          "FIRST_FRAME",
+          "FIRST_LAST_FRAME"
+        ],
+        "realAPI": "NOT_RUN"
+      },
+      {
+        "canonical_model_or_route": "kling-v3",
+        "mediaKind": "IMAGE",
+        "modes": [
+          "TEXT_TO_IMAGE",
+          "IMAGE_REFERENCE"
+        ],
+        "realAPI": "NOT_RUN"
+      }
+    ],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "仅 B06 精确 Kling 3.0 子集；账户资格 UNKNOWN；真实生成 NOT_RUN"
+    },
+    "officialApi": {
+      "baseUrl": "https://api-singapore.klingai.com",
+      "authentication": "Bearer API Key; AK/SK legacy not implemented",
+      "queryVideo": "GET /tasks?task_ids={id}",
+      "queryImage": "GET /v1/images/generations/{id}",
+      "realAPI": "NOT_RUN"
+    },
+    "pathsByMediaKind": {
+      "VIDEO": "/text-to-video/kling-3.0",
+      "IMAGE": "/v1/images/generations"
+    },
+    "historicalResearch": {
+      "id": "K",
+      "label": "Kling · 视频",
+      "providerName": "Kling",
+      "kind": "ORIGINAL",
+      "baseUrl": "https://api-singapore.klingai.com",
+      "protocolId": "p1-01-K",
+      "protocolVersion": "UNKNOWN",
+      "region": "UNKNOWN",
+      "authType": "UNKNOWN",
+      "path": "",
+      "mediaKinds": [
+        "VIDEO"
+      ],
+      "required": [],
+      "regionOptions": [],
+      "requestMapping": "UNKNOWN: fetched reference pages did not expose operative schema; UNKNOWN",
+      "notes": "Closed; incomplete official operational evidence. 保存不联网，真实调用尚未适配。官方操作文档只取得页面外壳，API Key 与 JWT 认证证据冲突尚未解决。",
+      "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+      "checkedDate": "2026-11-10",
+      "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+      "sources": [
+        {
+          "id": "K-AUTH",
+          "url": "https://kling.ai/document-api/api/get-started/authentication",
+          "access": "SHELL_NOT_OPERATION_SCHEMA",
+          "checkedDate": "2026-11-10",
+          "sha256": "308716c1dae8279454e50ac84ec68833aee2c87da92c93d602941cfd94d68cdd",
+          "raw": "sources/K-AUTH.raw"
+        },
+        {
+          "id": "K-TEXT",
+          "url": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "access": "SHELL_NOT_OPERATION_SCHEMA",
+          "checkedDate": "2026-11-10",
+          "sha256": "308716c1dae8279454e50ac84ec68833aee2c87da92c93d602941cfd94d68cdd",
+          "raw": "sources/K-TEXT.raw"
+        },
+        {
+          "id": "K-IMAGE",
+          "url": "https://kling.ai/document-api/apiReference/model/imageToVideo",
+          "access": "SHELL_NOT_OPERATION_SCHEMA",
+          "checkedDate": "2026-11-10",
+          "sha256": "308716c1dae8279454e50ac84ec68833aee2c87da92c93d602941cfd94d68cdd",
+          "raw": "sources/K-IMAGE.raw"
+        },
+        {
+          "id": "K-UPDATES",
+          "url": "https://kling.ai/document-api/updates/api?date=2026-02-11",
+          "access": "SHELL_NOT_OPERATION_SCHEMA",
+          "checkedDate": "2026-11-10",
+          "sha256": "308716c1dae8279454e50ac84ec68833aee2c87da92c93d602941cfd94d68cdd",
+          "raw": "sources/K-UPDATES.raw"
+        },
+        {
+          "id": "K-ALT",
+          "url": "https://kling.ai/dev/document-api/apiReference/model/textToVideo",
+          "access": "SHELL_NOT_OPERATION_SCHEMA",
+          "checkedDate": "2026-11-10",
+          "sha256": "a76fbfd434d2003e1ff16e6d09ec77764d34b8ac99fc77cbf70a97c319fbf0f6",
+          "raw": "sources/K-ALT.raw"
+        },
+        {
+          "id": "K-LLMS",
+          "url": "https://kling.ai/llms.txt",
+          "access": "REVIEWED_OFFICIAL_DOCUMENT",
+          "checkedDate": "2026-11-10",
+          "sha256": "aac9ad5ccbdc221748caff66cac8ee7c7fbbfd176d0564f5d25839b36cc2abde",
+          "raw": "sources/K-LLMS.raw"
+        }
+      ],
+      "realAPI": "NOT_RUN",
+      "capability": "UNKNOWN",
+      "modelReferences": [
+        {
+          "canonical_model_or_route": "Kling 4.0",
+          "modes": {
+            "text_to_image": "N/A",
+            "text_to_video": "YES：官方索引",
+            "first_frame": "YES：官方索引",
+            "first_last_frame": "UNKNOWN：新版精确API keyframe schema未取得",
+            "multi_reference_images": "YES：Omni官方更新"
+          },
+          "duration": "3–30s",
+          "resolution": "720P/1080P；API更新注明4K coming soon",
+          "source_ids": [
+            "K.UPDATES"
+          ],
+          "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+        },
+        {
+          "canonical_model_or_route": "Kling 4.0 Flash",
+          "modes": {
+            "text_to_image": "N/A",
+            "text_to_video": "YES：官方索引",
+            "first_frame": "YES：官方索引",
+            "first_last_frame": "UNKNOWN：新版精确API keyframe schema未取得",
+            "multi_reference_images": "YES：Omni官方更新"
+          },
+          "duration": "3–20s",
+          "resolution": "720P",
+          "source_ids": [
+            "K.UPDATES"
+          ],
+          "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+        },
+        {
+          "canonical_model_or_route": "Kling 3.0",
+          "modes": {
+            "text_to_image": "N/A",
+            "text_to_video": "YES：官方索引",
+            "first_frame": "YES：官方索引",
+            "first_last_frame": "UNKNOWN：新版精确API keyframe schema未取得",
+            "multi_reference_images": "UNKNOWN：3.0 Omni必须独立核实"
+          },
+          "duration": "3–15s",
+          "resolution": "720p/1080p/4k",
+          "source_ids": [
+            "K.TEXT",
+            "K.IMAGE",
+            "K.AUTH"
+          ],
+          "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+        }
+      ],
+      "admission": {
+        "status": "BLOCK",
+        "scope": "Closed; incomplete official operational evidence.",
+        "reason": "官方操作文档只取得页面外壳，API Key 与 JWT 认证证据冲突尚未解决。",
+        "gaps": [
+          "Obtain current official readable authentication and versioned operation schema.",
+          "Resolve API-key versus JWT evidence conflict; confirm submit/query/errors/request ID/region details.",
+          "No safe AK/SK signing or credential lifecycle in current UI."
+        ]
+      },
+      "officialApi": {
+        "baseUrl": "https://api-singapore.klingai.com; official llms also lists api-beijing.klingai.com",
+        "submit": "UNKNOWN: fetched reference pages did not expose operative schema",
+        "authentication": {
+          "type": "UNKNOWN",
+          "header": "UNKNOWN",
+          "conflict": "Prior P1-01 indexed Bearer API-key report versus current official llms JWT AccessKey+SecretKey statement. Interactive auth/reference pages are shell content; no guessing.",
+          "requiredHeaders": "UNKNOWN"
+        },
+        "modelSelection": "UNKNOWN: model/operation fields and current version could not be corroborated in readable official specification.",
+        "regionProject": "Regional hosts confirmed in llms; exact model/account/region restrictions UNKNOWN.",
+        "submission": "UNKNOWN: llms describes REST generation but does not supply a sufficiently verified current submit envelope.",
+        "queryResult": "UNKNOWN: no verified exact task query/result routes retained as facts.",
+        "parametersCapabilities": "Official site describes image/video/motion features. Exact API fields and limits UNKNOWN; product marketing is not an API schema.",
+        "errors": "UNKNOWN; do not infer from third-party wrappers.",
+        "requestId": "UNKNOWN.",
+        "limitsVersions": "HTTP 200 on shell pages is not FULL access. Authentication evidence conflict prevents template admission."
+      }
+    }
+  },
+  {
+    "id": "R",
+    "label": "Runway · 图片 / 视频",
+    "providerName": "Runway",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.dev.runwayml.com",
+    "protocolId": "p1-01-R",
+    "protocolVersion": "2024-11-06",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/text_to_image",
+    "mediaKinds": [
+      "IMAGE",
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /v1/text_to_image (IMAGE); POST /v1/text_to_video (VIDEO); Authorization: Bearer <API secret>",
+    "notes": "仅图片／视频文字生成端点配置；图生视频等其他操作尚未适配。 保存不联网，真实调用尚未适配。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "R-SCHEMA",
+        "url": "https://docs.dev.runwayml.com/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "9be166e96b075256fab17998dc14ab0e07c6a2c233c1bf7dc9231f710b4e63e6",
+        "raw": "sources/R-SCHEMA.raw"
+      },
+      {
+        "id": "R-CONTEXT",
+        "url": "https://docs.dev.runwayml.com/ai-context.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "b0082f993bda9e53adc47920f9ea9bce432abe172f12cae9fa0a9da12737fb06",
+        "raw": "sources/R-CONTEXT.raw"
+      },
+      {
+        "id": "R-API",
+        "url": "https://docs.dev.runwayml.com/api.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "16b16ca4982c066eefeb43e1cae0cd6aa25fce3f62dc5d5fde58591140281bc7",
+        "raw": "sources/R-API.raw"
+      },
+      {
+        "id": "R-MODELS",
+        "url": "https://docs.dev.runwayml.com/guides/models.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "d2c2cf9f41a17b482b8463ea8dd0126298deaca790fc00154d20b9645703c1ee",
+        "raw": "sources/R-MODELS.raw"
+      },
+      {
+        "id": "R-OUT",
+        "url": "https://docs.dev.runwayml.com/assets/outputs.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "bb0e42a8f3f788edfd9006bb4f8b12848f9c6cc48ad1a5ea20922e843a7681c3",
+        "raw": "sources/R-OUT.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "gen4.5",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "NO：schema仅first且maxItems1",
+          "multi_reference_images": "NO：本模式仅first"
+        },
+        "duration": "2–10整数秒",
+        "resolution": "所列像素；native/upscale属性 UNKNOWN",
+        "source_ids": [
+          "R.SCHEMA",
+          "R.CONTEXT"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gen4_turbo",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：当前此模型未列T2V联合类型",
+          "first_frame": "YES",
+          "first_last_frame": "NO：仅first",
+          "multi_reference_images": "NO：仅first"
+        },
+        "duration": "2–10整数秒",
+        "resolution": "见ratio像素值",
+        "source_ids": [
+          "R.SCHEMA"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gen4_image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见ratio像素；不能把Turbo参考必填隐藏",
+        "source_ids": [
+          "R.SCHEMA"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "gen4_image_turbo",
+        "modes": {
+          "text_to_image": "NO：纯文字不满足referenceImages必填",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "见ratio像素；不能把Turbo参考必填隐藏",
+        "source_ids": [
+          "R.SCHEMA"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "仅图片／视频文字生成端点配置；图生视频等其他操作尚未适配。",
+      "reason": "",
+      "gaps": []
+    },
+    "officialApi": {
+      "baseUrl": "https://api.dev.runwayml.com",
+      "submit": "POST /v1/text_to_image (IMAGE); POST /v1/text_to_video (VIDEO)",
+      "authentication": {
+        "type": "BEARER",
+        "header": "Authorization: Bearer <API secret>",
+        "requiredHeaders": {
+          "Content-Type": "application/json",
+          "X-Runway-Version": "2024-11-06"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "body.model; task endpoint determined by explicit user media choice. Exact model ID preserved; input schema is a discriminated union by model.",
+      "regionProject": "No request Region/Project field in reviewed generation routes; organization/key permissions remain UNKNOWN.",
+      "submission": "Asynchronous POST returns id. Other routes image_to_video/video_to_video/generate/* are separately documented, not admitted by this template.",
+      "queryResult": "GET /v1/tasks/{id}; PENDING/THROTTLED/RUNNING/SUCCEEDED/FAILED/CANCELLED; output URL array only after SUCCEEDED. DELETE task route documented, not implemented.",
+      "parametersCapabilities": "promptText/model; ratio/duration/references vary by model. Raw OpenAPI records required/enumerated fields. No union of all model capabilities is enabled.",
+      "errors": "400 error/issues/reason; 429 rate limit; task failure/failureCode. Do not treat THROTTLED as failure.",
+      "requestId": "Task UUID documented; generation response correlation header UNKNOWN (audit-log requestId is not asserted as generation header).",
+      "limitsVersions": "X-Runway-Version remains required even on task reads. Output URLs temporary, typically 24–48h. Third-party model names on Runway remain Runway service routes, not original-provider access."
+    },
+    "pathsByMediaKind": {
+      "IMAGE": "/v1/text_to_image",
+      "VIDEO": "/v1/text_to_video"
+    }
+  },
+  {
+    "id": "M.V1",
+    "label": "MiniMax Hailuo · 视频 · v1",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.io",
+    "protocolId": "p1-01-M.V1",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/video_generation",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC POST /v1/video_generation\n认证参考：Authorization: Bearer <API key>",
+    "notes": "UNKNOWN：global API路线；中国站minimaxi需独立核对，不互换；公开API文档；需对应账户余额/资源权限，未登录核实",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.T2V",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-t2v.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.I2V",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-i2v.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.Q1",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-query.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.FILE",
+        "url": "https://platform.minimax.io/docs/api-reference/file-management-retrieve.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "MiniMax-Hailuo-2.3",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "UNKNOWN：本轮未读取独立首尾帧文档，不从H3继承",
+          "multi_reference_images": "NO：本次v1 I2V契约仅first_frame_image"
+        },
+        "duration": "6/10s，受resolution限制",
+        "resolution": "768P：6/10s；1080P：6s",
+        "source_ids": [
+          "M.T2V",
+          "M.I2V",
+          "M.Q1"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-Hailuo-2.3-Fast",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：T2V模型枚举未包含Fast",
+          "first_frame": "YES",
+          "first_last_frame": "UNKNOWN：本轮未读取独立首尾帧文档，不从H3继承",
+          "multi_reference_images": "NO：本次v1 I2V契约仅first_frame_image"
+        },
+        "duration": "6/10s，受resolution限制",
+        "resolution": "768P：6/10s；1080P：6s",
+        "source_ids": [
+          "M.T2V",
+          "M.I2V",
+          "M.Q1"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-Hailuo-02",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "UNKNOWN：本轮未读取独立首尾帧文档，不从H3继承",
+          "multi_reference_images": "NO：本次v1 I2V契约仅first_frame_image"
+        },
+        "duration": "6/10s，受resolution限制",
+        "resolution": "I2V512P/768P：6/10s；1080P：6s；T2V无512P",
+        "source_ids": [
+          "M.T2V",
+          "M.I2V",
+          "M.Q1"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "M.V2",
+    "label": "MiniMax Hailuo · 视频 · v2",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.io",
+    "protocolId": "p1-01-M.V2",
+    "protocolVersion": "v2",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v2/video_generation",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC POST /v2/video_generation\n认证参考：Authorization: Bearer <API key>",
+    "notes": "UNKNOWN：global路由不证明驻留；公开API文档；H3系列须Pay-as-you-go API；账户权限未验证",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.H3",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-v2-create.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.Q2",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-v2-query.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "MiniMax-H3",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "768P/2K",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Highspeed",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480P/768P",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Lite",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480P/768P",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Max",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "5–15s",
+        "resolution": "480P/768P",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "M.I",
+    "label": "MiniMax Hailuo · 图片",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.io",
+    "protocolId": "p1-01-M.I",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/image_generation",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "同步 POST /v1/image_generation\n认证参考：Authorization: Bearer <API key>",
+    "notes": "UNKNOWN：仅核国际路线；公开image API；实际账号资格 UNKNOWN",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.T2I",
+        "url": "https://platform.minimax.io/docs/api-reference/image-generation-t2i.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.I2I",
+        "url": "https://platform.minimax.io/docs/api-reference/image-generation-i2i.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "image-01",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "UNKNOWN：subject_reference为数组但未核硬张数；非通用多图融合"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤2048/边（自定义）",
+        "source_ids": [
+          "M.T2I",
+          "M.I2I"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "L",
+    "label": "Luma · 图片 / 视频",
+    "providerName": "Luma",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://agents.lumalabs.ai",
+    "protocolId": "p1-01-L",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/generations",
+    "mediaKinds": [
+      "IMAGE",
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC POST /v1/generations；type区分image/video/image_edit等\n认证参考：Authorization: Bearer <Luma Agents API key>",
+    "notes": "UNKNOWN：不把API地域/存储URL推为驻留承诺；公开Agents API文档；实际账户/额度资格 UNKNOWN；旧Dream Machine与当前Agents合同分开",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-09",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "L.IMG",
+        "url": "https://docs.agents.lumalabs.ai/guides/images/generation/",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "L.VID",
+        "url": "https://docs.agents.lumalabs.ai/guides/videos/generation/",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "L.OLD",
+        "url": "https://docs.lumalabs.ai/docs/video-generation",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "uni-1",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN：精确像素/模型输出tier未核",
+        "source_ids": [
+          "L.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "uni-1-max",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN：精确像素/模型输出tier未核",
+        "source_ids": [
+          "L.IMG"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "ray-3.2",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES：legacy anchor仅5s；multi-keyframe另见",
+          "first_last_frame": "YES：start_frame/end_frame仅5s",
+          "multi_reference_images": "NO：已核只有时间锚定keyframes，不是无时序多参考模式"
+        },
+        "duration": "5s/10s；start/end仅5s；multi-keyframe可10s",
+        "resolution": "360p/540p/720p/1080p；HDR只720p/1080p",
+        "source_ids": [
+          "L.VID"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "P",
+    "label": "Pika · 视频",
+    "providerName": "Pika",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.dev.pika.art",
+    "protocolId": "p1-01-P",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "HEADER_KEY",
+    "path": "",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /v1/media/pika/pika-2.5/text-to-video; /v1/media/pika/pika-2.5/image-to-video; /v1/media/pika/pikaframes/image-to-video; X-API-Key",
+    "notes": "Closed; current Pika-native operations distinguished from partner-hosted Pika and unverified legacy examples. 保存不联网，真实调用尚未适配。新版 Pika 按厂商／模型／操作选择路径，不能套用 body.model；旧版协议尚未独立核实。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "P-INDEX",
+        "url": "https://dev.pika.art/llms.txt",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "2379544d3c140aea4fd1e7179ec8738094f0a196ad0f8c6d81bc158b86172925",
+        "raw": "sources/P-INDEX.raw"
+      },
+      {
+        "id": "P-T2V",
+        "url": "https://dev.pika.art/llms/pika/pika-2.5/text-to-video",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "aee0adddb8dad7215ccec43dee89c6a05472ebba6f6b2c7db72037768c077355",
+        "raw": "sources/P-T2V.raw"
+      },
+      {
+        "id": "P-I2V",
+        "url": "https://dev.pika.art/llms/pika/pika-2.5/image-to-video",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "3af652eedacacd3f236c0e4a3ecb7adbc1c281c2d8030cd85a703ac51df9bc64",
+        "raw": "sources/P-I2V.raw"
+      },
+      {
+        "id": "P-FRAMES",
+        "url": "https://dev.pika.art/llms/pika/pikaframes/image-to-video",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "5630de2f46beced9537b0a27449077bf32b8ca7f64b7d3f3dd7830d561172bce",
+        "raw": "sources/P-FRAMES.raw"
+      },
+      {
+        "id": "P-OLD",
+        "url": "https://dev.pika.art/",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "4009b0fa2bab6506dee54454681b74ff50fdcc97a36b97758c2de364a051a0c5",
+        "raw": "sources/P-OLD.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "pika/pika-2.5/text-to-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "NO：该operation不接受图",
+          "first_last_frame": "NO：该operation无首尾输入",
+          "multi_reference_images": "NO：该operation无自由多参考"
+        },
+        "duration": "5/10s",
+        "resolution": "480p/720p/1080p",
+        "source_ids": [
+          "P.T2V",
+          "P.INDEX"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "pika/pika-2.5/image-to-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：该operation要求图片",
+          "first_frame": "YES",
+          "first_last_frame": "NO：该operation无首尾输入",
+          "multi_reference_images": "NO：该operation无自由多参考"
+        },
+        "duration": "5/10s",
+        "resolution": "480p/720p/1080p",
+        "source_ids": [
+          "P.I2V",
+          "P.INDEX"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "pika/pikaframes/image-to-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：该operation要求图片",
+          "first_frame": "UNKNOWN：单图仅loop，非普通首帧",
+          "first_last_frame": "YES：2 ordered keyframes",
+          "multi_reference_images": "NO：keyframes是时序锚点"
+        },
+        "duration": "每过渡1–10s；多过渡每段≤5s；总时长按边数/loop；总上限 UNKNOWN",
+        "resolution": "720p/1080p",
+        "source_ids": [
+          "P.FRAMES",
+          "P.INDEX"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "PARTIAL",
+      "scope": "Closed; current Pika-native operations distinguished from partner-hosted Pika and unverified legacy examples.",
+      "reason": "新版 Pika 按厂商／模型／操作选择路径，不能套用 body.model；旧版协议尚未独立核实。",
+      "gaps": [
+        "Existing MODEL_ID/body.model route cannot express vendor/model/function path selector.",
+        "Operation-specific inputs/uploads/job rejection mapping needs a separate protocol task."
+      ]
+    },
+    "officialApi": {
+      "baseUrl": "https://api.dev.pika.art",
+      "submit": "POST /v1/media/pika/pika-2.5/text-to-video; /v1/media/pika/pika-2.5/image-to-video; /v1/media/pika/pikaframes/image-to-video",
+      "authentication": {
+        "type": "HEADER_KEY",
+        "header": "X-API-Key",
+        "alternate": "Authorization: Bearer <Pika API key>",
+        "requiredHeaders": {
+          "Content-Type": "application/json"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "Exact vendor/model/function operation ID selects path; request fields per linked operation. Public catalog precedence does not authorize paid calls.",
+      "regionProject": "No user Region/Project fields in reviewed operations; key identifies organization.",
+      "submission": "Asynchronous job envelope; rejected submit can still return an id with failed status. Idempotency replay may return failed job. No automatic retry in workbench.",
+      "queryResult": "GET /v1/media/jobs/{request_id}; output download URL. GET /v1/media/jobs/{request_id}/content yields URL or 409 until complete.",
+      "parametersCapabilities": "Text-to-video prompt and model-specific duration/resolution/aspect settings; image-to-video and Pikaframes have distinct required inputs. Presigned uploads have signed Content-Type/Length and expiry.",
+      "errors": "Request-level {message}; after job creation {id,status:failed,error:{code,message}}. Same HTTP code can represent auth or billing; do not assume.",
+      "requestId": "Job envelope id used as request_id; separate correlation response header UNKNOWN.",
+      "limitsVersions": "Current dev.pika.art specifies v1/media and X-API-Key. Older partner/fal/pika legacy examples are not interchangeable; legacy route/version/auth not independently verified here (UNKNOWN). pika.art/api now redirects to current docs; not evidence that old API works."
+    }
+  },
+  {
+    "id": "B.flux-3-image",
+    "label": "BFL · flux-3-image",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I3.flux-3-image",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-3-image",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-3-image-klein",
+    "label": "BFL · flux-3-image-klein",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I3K.flux-3-image-klein",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-3-image-klein",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-2-pro",
+    "label": "BFL · flux-2-pro",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I2.flux-2-pro",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-2-pro",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-2-max",
+    "label": "BFL · flux-2-max",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I2.flux-2-max",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-2-max",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-2-flex",
+    "label": "BFL · flux-2-flex",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I2F.flux-2-flex",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-2-flex",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-2-klein-4b",
+    "label": "BFL · flux-2-klein-4b",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I2K.flux-2-klein-4b",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-2-klein-4b",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-2-klein-9b",
+    "label": "BFL · flux-2-klein-9b",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.I2K.flux-2-klein-9b",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-2-klein-9b",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B.flux-3-video",
+    "label": "BFL · flux-3-video · Preview",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B.V3.flux-3-video",
+    "protocolVersion": "v1",
+    "region": "global",
+    "authType": "HEADER_KEY",
+    "path": "/v1/flux-3-video",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "Fixed endpoint; x-key; asynchronous original polling_url",
+    "notes": "B08 精确合同；真实 API、地域和账户权限未验证，原生联网 BLOCK。图片仅 PNG/JPEG 本地受限子集；Video Preview 仅 t2v。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "sources": [
+      {
+        "id": "B08-OPENAPI",
+        "url": "https://api.bfl.ai/openapi.json",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-11"
+      }
+    ],
+    "modelReferences": [],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "B08 fixed original BFL model endpoint; live dispatch blocked until separate entitlement authorization"
+    }
+  },
+  {
+    "id": "B",
+    "label": "Black Forest Labs FLUX · 图片 / 视频",
+    "providerName": "Black Forest Labs FLUX",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.bfl.ai",
+    "protocolId": "p1-01-B",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "HEADER_KEY",
+    "path": "",
+    "mediaKinds": [
+      "IMAGE",
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [
+      "global",
+      "EU",
+      "US"
+    ],
+    "requestMapping": "POST /v1/flux-2-pro-preview (reviewed image example); POST /v1/flux-3-video (video schema); x-key",
+    "notes": "Closed; no model endpoint silently substituted. 保存不联网，真实调用尚未适配。FLUX 按模型端点路径选择模型；当前只支持 body.model 路由，尚无安全的轮询地址处理。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "B-INTEGRATE",
+        "url": "https://docs.bfl.ai/api_integration/integration_guidelines.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "289c4220aa45ade5591c952759dd7f0d9a2b7047d93a872ce82d9dd53c66d2e5",
+        "raw": "sources/B-INTEGRATE.raw"
+      },
+      {
+        "id": "B-EDIT",
+        "url": "https://docs.bfl.ai/flux_2/flux2_image_editing.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "f3a90697fd85760ec380af115ff45889e9166189cb5cc335891e19dbad246d86",
+        "raw": "sources/B-EDIT.raw"
+      },
+      {
+        "id": "B-VIDEO",
+        "url": "https://docs.bfl.ai/api-reference/utility/generate-a-video-with-flux-3.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "88cd9a84f0ea0296c497fc773674ebd0fd9494a683603fad04ae6cd150857579",
+        "raw": "sources/B-VIDEO.raw"
+      },
+      {
+        "id": "B-ERROR",
+        "url": "https://docs.bfl.ai/api_integration/errors.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "6fc36086191a2e7b8358dc62c0b8adc006cc4b1cb94bf0e30cc199c09f32cd07",
+        "raw": "sources/B-ERROR.raw"
+      },
+      {
+        "id": "B-INDEX",
+        "url": "https://docs.bfl.ai/llms.txt",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "d665493f6cbdfb0ca1f1d6a98ea0f51251538c5500d6e2ab673ac4d91f253766",
+        "raw": "sources/B-INDEX.raw"
+      },
+      {
+        "id": "B-RESULT2",
+        "url": "https://docs.bfl.ml/api-reference/utility/get-result.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "03cbe554c56bf3060849122e9db1a211b9b1bd9e759effb644f9b46af2524194",
+        "raw": "sources/B-RESULT2.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "flux-2-pro",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤4MP",
+        "source_ids": [
+          "B.OVERVIEW",
+          "B.EDIT",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-2-max",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤4MP",
+        "source_ids": [
+          "B.OVERVIEW",
+          "B.EDIT",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-2-flex",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤4MP",
+        "source_ids": [
+          "B.OVERVIEW",
+          "B.EDIT",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-2-klein-4b",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤4MP",
+        "source_ids": [
+          "B.OVERVIEW",
+          "B.EDIT",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-2-klein-9b",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤4MP",
+        "source_ids": [
+          "B.OVERVIEW",
+          "B.EDIT",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-3-image",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "768sq/1k/1.5k/2k/4k；Klein编辑默认沿首图；更高像素限制另核",
+        "source_ids": [
+          "B.I3",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-3-image-klein",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "768sq/1k/1.5k/2k/4k；Klein编辑默认沿首图；更高像素限制另核",
+        "source_ids": [
+          "B.K3",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "flux-3-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES：keyframes1",
+          "first_last_frame": "YES：keyframes2",
+          "multi_reference_images": "NO：Omni参考仍coming soon；多keyframes不等于自由参考"
+        },
+        "duration": "T2V/I2V5–20整数秒或auto；V2V5–15s或auto",
+        "resolution": "hd；fhd/qhd/uhd经upsampler；24fps；不要全部标原生4K",
+        "source_ids": [
+          "B.VIDEO",
+          "B.VOV",
+          "B.INTEGRATE"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "PARTIAL",
+      "scope": "Closed; no model endpoint silently substituted.",
+      "reason": "FLUX 按模型端点路径选择模型；当前只支持 body.model 路由，尚无安全的轮询地址处理。",
+      "gaps": [
+        "Existing resolver only supports body.model, not model-in-path selection.",
+        "Returned-URL origin/auth validation and endpoint-specific request/result mapping require separate protocol implementation."
+      ]
+    },
+    "officialApi": {
+      "baseUrl": "https://api.bfl.ai (global); https://api.eu.bfl.ai / https://api.us.bfl.ai (regional)",
+      "submit": "POST /v1/flux-2-pro-preview (reviewed image example); POST /v1/flux-3-video (video schema)",
+      "authentication": {
+        "type": "HEADER_KEY",
+        "header": "x-key",
+        "requiredHeaders": {
+          "Content-Type": "application/json"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "Model selected by endpoint path, not generic body.model. Each endpoint/schema is separate; Flux image/video names are not interchangeable.",
+      "regionProject": "Region selects base host; no Cloud Project field. Account/model regional availability UNKNOWN.",
+      "submission": "Asynchronous JSON, response includes id and polling_url.",
+      "queryResult": "Use returned polling_url; Ready result.sample for reviewed image response. Do not invent a host/path from id. Result/video schema must match selected endpoint.",
+      "parametersCapabilities": "Image prompt, dimensions, output_format and model-dependent input_image fields; video mode/text/images/video settings are separate documented schema. No automatic capability inference.",
+      "errors": "HTTP 400/402/403/422/429/500/503; polling status Ready/Pending/Request Moderated/Content Moderated/Task not found/Error. result may be null.",
+      "requestId": "Generation id documented; separate correlation header UNKNOWN.",
+      "limitsVersions": "Use returned polling_url across global/regional endpoints; do not leak x-key to arbitrary returned hosts. API schema paths/version differ across model generations."
+    }
+  },
+  {
+    "id": "S",
+    "label": "Stability AI · SD3.5 图片",
+    "providerName": "Stability AI",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.stability.ai",
+    "protocolId": "p1-01-S",
+    "protocolVersion": "v2beta",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v2beta/stable-image/generate/sd3",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /v2beta/stable-image/generate/sd3; Authorization: Bearer <API key>",
+    "notes": "仅 SD3.5 系列图片配置，使用 model 字段；Core、Ultra 是其他端点，不在此配置范围。 保存不联网，真实调用尚未适配。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "S-SD35",
+        "url": "https://docs.stability.ai/api-reference/generate/stable-diffusion-35.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "ee4309072cab09fc0a2034beb541275114d68d88483f069b24df4ec34d08bac9",
+        "raw": "sources/S-SD35.raw"
+      },
+      {
+        "id": "S-CORE",
+        "url": "https://docs.stability.ai/api-reference/generate/stable-image-core.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "89d8e64934c94b93876eb8a2369334363bedec57390ae87b8fcd8de7bd52d322",
+        "raw": "sources/S-CORE.raw"
+      },
+      {
+        "id": "S-ULTRA",
+        "url": "https://docs.stability.ai/api-reference/generate/stable-image-ultra.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "c8aeb440e17428cbc6013d4f91a5c318d2ec3dee4671ead0e633c89380f5c3cb",
+        "raw": "sources/S-ULTRA.raw"
+      },
+      {
+        "id": "S-API",
+        "url": "https://docs.stability.ai/api-reference",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "d4b75eb4fc0c279355f806953c7edddd9c069863fe4f360adc46703d51f1c21f",
+        "raw": "sources/S-API.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "Stable Image Core",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：本请求schema没有多图参考"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1.5MP",
+        "source_ids": [
+          "S.CORE",
+          "S.API"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "Stable Image Ultra",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：本请求schema没有多图参考"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "1MP；默认1024×1024",
+        "source_ids": [
+          "S.ULTRA",
+          "S.API"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "sd3.5-large",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：本请求schema没有多图参考"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "约1MP",
+        "source_ids": [
+          "S.SD35",
+          "S.API"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "sd3.5-large-turbo",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：本请求schema没有多图参考"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "约1MP",
+        "source_ids": [
+          "S.SD35",
+          "S.API"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "sd3.5-medium",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：本请求schema没有多图参考"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "精确像素范围 UNKNOWN",
+        "source_ids": [
+          "S.SD35",
+          "S.API"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "TEMPLATE_READY",
+      "scope": "仅 SD3.5 系列图片配置，使用 model 字段；Core、Ultra 是其他端点，不在此配置范围。",
+      "reason": "",
+      "gaps": []
+    },
+    "officialApi": {
+      "baseUrl": "https://api.stability.ai",
+      "submit": "POST /v2beta/stable-image/generate/sd3",
+      "authentication": {
+        "type": "BEARER",
+        "header": "Authorization: Bearer <API key>",
+        "requiredHeaders": {
+          "Content-Type": "multipart/form-data; boundary=<encoder-generated>",
+          "Accept": "image/* or application/json"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "SD3.5 family uses multipart body.model. Core and Ultra use different fixed endpoint paths and do not share this model selector; they remain outside admitted profile.",
+      "regionProject": "No Region/Project URL fields in reviewed API.",
+      "submission": "Synchronous multipart response, binary image or JSON base64 according to Accept; not a queue task.",
+      "queryResult": "Result is the submit response. No polling route for this operation. Other async APIs are not substituted.",
+      "parametersCapabilities": "prompt required; model/output_format/seed/negative_prompt/cfg_scale/style_preset and aspect_ratio; image-to-image additionally image,strength,mode. Model-specific enums/ranges retained in original OpenAPI.",
+      "errors": "HTTP status plus id/name/errors[] schemas; x-request-id response header documented. 400/401/403/413/422/429/500 are operation-specific.",
+      "requestId": "x-request-id (documented response header), plus error id where present.",
+      "limitsVersions": "v2beta. SD3.0 documented rerouting/deprecation from 2025-04-17. Max request 10MiB. Multipart encoder and image transport not implemented by this task. Source inconsistency: prose mentions sd3.5-flash but embedded model enum omits it. Treat Flash eligibility/enum as UNKNOWN, do not enable it."
+    }
+  },
+  {
+    "id": "F",
+    "label": "fal.ai · 图片 / 视频",
+    "providerName": "fal.ai",
+    "kind": "THIRD_PARTY",
+    "baseUrl": "https://queue.fal.run",
+    "protocolId": "p1-01-F",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "HEADER_KEY",
+    "path": "",
+    "mediaKinds": [
+      "IMAGE",
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /{owner}/{app}/{endpoint-subpath} (example /fal-ai/flux/schnell); Authorization: Key <FAL_KEY>",
+    "notes": "Closed; platform queue protocol verified, model-specific input coverage remains scoped to references. 保存不联网，真实调用尚未适配。fal.ai 用端点路径和模型专属输入；队列查询地址不能按提交路径直接拼接，当前映射尚未接入。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "F-QUEUE",
+        "url": "https://fal.ai/docs/documentation/model-apis/inference/queue.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "fe5913afeb693e6e97b966be1ba21e5b8174e5480018c8761c9e20a149c94dcd",
+        "raw": "sources/F-QUEUE.raw"
+      },
+      {
+        "id": "F-AUTH",
+        "url": "https://fal.ai/docs/documentation/setting-up/authentication/index.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "4caa67a31c62b77749513541386900e09ded37c7f4d88ab668a70e283b8467c5",
+        "raw": "sources/F-AUTH.raw"
+      },
+      {
+        "id": "F-ERROR",
+        "url": "https://fal.ai/docs/documentation/model-apis/errors.md",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "ee5beee345ce09eb2eec9e8d3d48d34a54a68bc50ccd666433de9c4d5bc9fcf7",
+        "raw": "sources/F-ERROR.raw"
+      },
+      {
+        "id": "F-MODEL",
+        "url": "https://fal.ai/models/fal-ai/flux/dev/api",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "b427c2a18ddcde2cd67ef62f37dea3d950e707cbb84f77b52aeff3ecda5b5953",
+        "raw": "sources/F-MODEL.raw"
+      },
+      {
+        "id": "F-RETAIN",
+        "url": "https://fal.ai/docs/documentation/model-apis/media-expiration",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "d8671f63aac1f72e12bef7d2d77eae3bed650dd9d1eefc532cbe3cec5fcc9a75",
+        "raw": "sources/F-RETAIN.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "fal-ai/flux-2-pro",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "NO：本T2I schema没有image_urls"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "F.FLUX",
+          "F.QUEUE",
+          "F.RETAIN"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "fal-ai/flux-2-pro/edit",
+        "modes": {
+          "text_to_image": "NO：该route要求image_urls",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES：image_urls数组"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "F.FLUXEDIT",
+          "F.QUEUE",
+          "F.RETAIN"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "fal-ai/veo3.1",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "NO：本route纯T2V",
+          "first_last_frame": "NO：本route无首尾字段",
+          "multi_reference_images": "NO：本route无参考图字段"
+        },
+        "duration": "4s/6s/8s（schema）；prose5–8s有差异，采用明确enum并记录",
+        "resolution": "720p/1080p",
+        "source_ids": [
+          "F.VEO",
+          "F.QUEUE",
+          "F.RETAIN"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "fal-ai/pika/v2.2/image-to-video",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：已移除",
+          "first_frame": "NO：已移除",
+          "first_last_frame": "NO：已移除",
+          "multi_reference_images": "NO：已移除"
+        },
+        "duration": "UNKNOWN",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "F.PIKA"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "PARTIAL",
+      "scope": "Closed; platform queue protocol verified, model-specific input coverage remains scoped to references.",
+      "reason": "fal.ai 用端点路径和模型专属输入；队列查询地址不能按提交路径直接拼接，当前映射尚未接入。",
+      "gaps": [
+        "Existing resolver requires body.model and cannot route by endpoint path.",
+        "Need safe queue URL handling and per-model input schema binding; no common model input is inferred."
+      ]
+    },
+    "officialApi": {
+      "baseUrl": "https://queue.fal.run",
+      "submit": "POST /{owner}/{app}/{endpoint-subpath} (example /fal-ai/flux/schnell)",
+      "authentication": {
+        "type": "HEADER_KEY",
+        "header": "Authorization: Key <FAL_KEY>",
+        "requiredHeaders": {
+          "Content-Type": "application/json"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "Endpoint/application path identifies hosted model operation; JSON body is model-specific input, not a platform-wide model/prompt schema.",
+      "regionProject": "No standard request Region/Project required for reviewed Model APIs; Serverless deployment is a separate product.",
+      "submission": "Queue ASYNC; IN_QUEUE/IN_PROGRESS/COMPLETED. Direct synchronous and subscribe helper are different workflows.",
+      "queryResult": "Use status_url and response_url from submit with request_id. Status/result URLs use owner/app, omitting endpoint subpath; constructing full submit path + /requests is wrong.",
+      "parametersCapabilities": "Platform protocol defines queue envelope only; fal-ai/flux/dev example and each model API define prompt/image settings independently. sync_mode often changes output storage, not queue submission mode.",
+      "errors": "HTTP plus detail[] loc/msg/type/ctx; schema migration incomplete for some endpoints. X-Fal-Needs-Retry is advisory; no retry enabled here.",
+      "requestId": "request_id in queue response; separate correlation header UNKNOWN.",
+      "limitsVersions": "Returned queue/media URLs need origin/auth and retention controls. Model APIs and self-hosted Serverless are not interchangeable."
+    }
+  },
+  {
+    "id": "Q",
+    "label": "Replicate · 图片 / 视频",
+    "providerName": "Replicate",
+    "kind": "THIRD_PARTY",
+    "baseUrl": "https://api.replicate.com/v1",
+    "protocolId": "p1-01-Q",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "",
+    "mediaKinds": [
+      "IMAGE",
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "POST /models/{owner}/{name}/predictions (official models); POST /predictions (version); POST /deployments/{owner}/{name}/predictions (deployment); Authorization: Bearer <API token>",
+    "notes": "Closed; universal prediction protocol does not validate every hosted model input. 保存不联网，真实调用尚未适配。Replicate 的模型路径、版本和部署选择不同；当前界面与路由未支持这些选择及模型专属输入。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-10",
+    "matrixSha256": "ccee43351d4cf84cf8095cc0e712cfce0b3180e87e5283846ffabb7c5090d5be",
+    "sources": [
+      {
+        "id": "Q-HTTP",
+        "url": "https://replicate.com/docs/reference/http",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "f1a2325856d07e6b24e5dc1070fe7e747e3659eade88fed5886b56ae4439aeb9",
+        "raw": "sources/Q-HTTP.raw"
+      },
+      {
+        "id": "Q-ERROR",
+        "url": "https://replicate.com/docs/reference/error-codes",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "2855630e5a92e8a9a531326096f3a744beed978f88eb2d6b5e7803aaea95f196",
+        "raw": "sources/Q-ERROR.raw"
+      },
+      {
+        "id": "Q-RETAIN",
+        "url": "https://replicate.com/docs/topics/predictions/data-retention",
+        "access": "REVIEWED_OFFICIAL_DOCUMENT",
+        "checkedDate": "2026-11-10",
+        "sha256": "a70a0ecf4da2ca79a4fb70bd961075cc0bf10f350a0f2565d2940183161fda06",
+        "raw": "sources/Q-RETAIN.raw"
+      },
+      {
+        "id": "Q-MODEL",
+        "url": "https://replicate.com/black-forest-labs/flux-dev/api",
+        "access": "NAVIGATION_ONLY",
+        "checkedDate": "2026-11-10",
+        "sha256": "969c928ef720b1c97e6cef6b28ec8be505ca04e4ae8c159e799d09a4b06b1bf3",
+        "raw": "sources/Q-MODEL.raw"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "black-forest-labs/flux-2-pro",
+        "modes": {
+          "text_to_image": "YES：官方模型简介",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "YES：官方简介"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "Q.FLUX",
+          "Q.HTTP",
+          "Q.RETAIN"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "google/veo-3.1",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES：官方模型页",
+          "first_frame": "UNKNOWN：完整schema未获取",
+          "first_last_frame": "UNKNOWN：简介有last frame，未核首尾组合约束",
+          "multi_reference_images": "YES：官方简介；张数UNKNOWN"
+        },
+        "duration": "UNKNOWN",
+        "resolution": "UNKNOWN",
+        "source_ids": [
+          "Q.VEO",
+          "Q.HTTP",
+          "Q.RETAIN"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ],
+    "admission": {
+      "status": "PARTIAL",
+      "scope": "Closed; universal prediction protocol does not validate every hosted model input.",
+      "reason": "Replicate 的模型路径、版本和部署选择不同；当前界面与路由未支持这些选择及模型专属输入。",
+      "gaps": [
+        "Current UI only MODEL_ID/ENDPOINT_ID and resolver body.model; version/path/deployment selectors need separate mapping.",
+        "Model-specific input schema must be attached before enabling actual generation; current model reference shell does not provide it."
+      ]
+    },
+    "officialApi": {
+      "baseUrl": "https://api.replicate.com/v1",
+      "submit": "POST /models/{owner}/{name}/predictions (official models); POST /predictions (version); POST /deployments/{owner}/{name}/predictions (deployment)",
+      "authentication": {
+        "type": "BEARER",
+        "header": "Authorization: Bearer <API token>",
+        "requiredHeaders": {
+          "Content-Type": "application/json"
+        },
+        "optionalHeaders": {
+          "Prefer": "wait=1..60"
+        },
+        "secretValue": "NOT_PROVIDED"
+      },
+      "modelSelection": "Official model owner/name path versus version body selector versus deployment path are distinct. Each body input follows selected model version OpenAPI schema.",
+      "regionProject": "No standard Region/Project fields for these public endpoints; deployment/account access UNKNOWN.",
+      "submission": "Asynchronous prediction by default; Prefer wait is bounded waiting and may return a still-running prediction, not a new job or retry instruction.",
+      "queryResult": "GET /predictions/{id}; status starting/processing/succeeded/failed/canceled; output field model-specific. urls.get and cancel links per response.",
+      "parametersCapabilities": "Generic envelope version/input/webhook options; input JSON schema is model/version-specific. The retrieved flux-dev API page was a navigation shell, not a complete model input schema.",
+      "errors": "HTTP failures may include detail; prediction.error and E#### model error codes. Do not infer success from HTTP 200 while prediction failed.",
+      "requestId": "Prediction id documented; separate response correlation header UNKNOWN.",
+      "limitsVersions": "API prediction inputs/outputs/logs normally expire after one hour per retention policy; sync file/output lifecycle differs from arbitrary JSON models. Official/community/deployment routes have separate rules."
+    }
+  },
+  {
+    "id": "CUSTOM",
+    "label": "自定义 API",
+    "providerName": "自定义 API",
+    "kind": "CUSTOM",
+    "baseUrl": "",
+    "protocolId": "UNKNOWN",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "NONE",
+    "path": "",
+    "mediaKinds": [
+      "VIDEO",
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "UNKNOWN：由用户明确配置；尚未适配真实调用",
+    "notes": "不接收真实 Key；保存配置不验证连接。",
+    "evidence": "USER_DECLARED",
+    "sources": [],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": []
+  },
+  {
+    "id": "LOCAL",
+    "label": "本地 / 自架服务",
+    "providerName": "本地 / 自架服务",
+    "kind": "CUSTOM",
+    "baseUrl": "",
+    "protocolId": "UNKNOWN",
+    "protocolVersion": "UNKNOWN",
+    "region": "UNKNOWN",
+    "authType": "NONE",
+    "path": "",
+    "mediaKinds": [
+      "VIDEO",
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "UNKNOWN：由用户明确配置；尚未适配真实调用",
+    "notes": "不接收真实 Key；保存配置不验证连接。",
+    "evidence": "USER_DECLARED",
+    "sources": [],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": []
+  },
+  {
+    "id": "MOCK",
+    "label": "Mock 演示（不联网）",
+    "providerName": "Mock 演示（不联网）",
+    "kind": "CUSTOM",
+    "baseUrl": "https://gateway.example.invalid/v1",
+    "protocolId": "p1-mock",
+    "protocolVersion": "1",
+    "region": "UNKNOWN",
+    "authType": "NONE",
+    "path": "/mock/tasks",
+    "mediaKinds": [
+      "VIDEO",
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "合成 Mock / 无 HTTP",
+    "notes": "不接收真实 Key；保存配置不验证连接。",
+    "evidence": "SYNTHETIC",
+    "sources": [],
+    "realAPI": "NOT_RUN",
+    "capability": "MOCK_ONLY",
+    "modelReferences": []
+  },
+  {
+    "id": "M.V1.CN",
+    "label": "MiniMax Hailuo · 视频 · v1 · 中国",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.cn",
+    "protocolId": "p1-01-M.V1.CN",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/video_generation",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC POST /v1/video_generation\n认证参考：Authorization: Bearer <API key>",
+    "notes": "中国独立连接；官方协议已核实，账户权限UNKNOWN；无跨区回退。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.T2V",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-t2v.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.I2V",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-i2v.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.Q1",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-query.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.FILE",
+        "url": "https://platform.minimax.io/docs/api-reference/file-management-retrieve.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "MiniMax-Hailuo-2.3",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "UNKNOWN：本轮未读取独立首尾帧文档，不从H3继承",
+          "multi_reference_images": "NO：本次v1 I2V契约仅first_frame_image"
+        },
+        "duration": "6/10s，受resolution限制",
+        "resolution": "768P：6/10s；1080P：6s",
+        "source_ids": [
+          "M.T2V",
+          "M.I2V",
+          "M.Q1"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-Hailuo-2.3-Fast",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "NO：T2V模型枚举未包含Fast",
+          "first_frame": "YES",
+          "first_last_frame": "UNKNOWN：本轮未读取独立首尾帧文档，不从H3继承",
+          "multi_reference_images": "NO：本次v1 I2V契约仅first_frame_image"
+        },
+        "duration": "6/10s，受resolution限制",
+        "resolution": "768P：6/10s；1080P：6s",
+        "source_ids": [
+          "M.T2V",
+          "M.I2V",
+          "M.Q1"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-Hailuo-02",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "UNKNOWN：本轮未读取独立首尾帧文档，不从H3继承",
+          "multi_reference_images": "NO：本次v1 I2V契约仅first_frame_image"
+        },
+        "duration": "6/10s，受resolution限制",
+        "resolution": "I2V512P/768P：6/10s；1080P：6s；T2V无512P",
+        "source_ids": [
+          "M.T2V",
+          "M.I2V",
+          "M.Q1"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "M.V2.CN",
+    "label": "MiniMax Hailuo · 视频 · v2 · 中国",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.cn",
+    "protocolId": "p1-01-M.V2.CN",
+    "protocolVersion": "v2",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v2/video_generation",
+    "mediaKinds": [
+      "VIDEO"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "ASYNC POST /v2/video_generation\n认证参考：Authorization: Bearer <API key>",
+    "notes": "中国独立连接；官方协议已核实，账户权限UNKNOWN；无跨区回退。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.H3",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-v2-create.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.Q2",
+        "url": "https://platform.minimax.io/docs/api-reference/video-generation-v2-query.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "MiniMax-H3",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "768P/2K",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Highspeed",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480P/768P",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Lite",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "4–15s",
+        "resolution": "480P/768P",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Max",
+        "modes": {
+          "text_to_image": "N/A",
+          "text_to_video": "YES",
+          "first_frame": "YES",
+          "first_last_frame": "YES",
+          "multi_reference_images": "YES"
+        },
+        "duration": "5–15s",
+        "resolution": "480P/768P",
+        "source_ids": [
+          "M.H3",
+          "M.Q2"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "M.I.CN",
+    "label": "MiniMax Hailuo · 图片 · 中国",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.cn",
+    "protocolId": "p1-01-M.I.CN",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/image_generation",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "同步 POST /v1/image_generation\n认证参考：Authorization: Bearer <API key>",
+    "notes": "中国独立连接；官方协议已核实，账户权限UNKNOWN；无跨区回退。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.T2I",
+        "url": "https://platform.minimax.io/docs/api-reference/image-generation-t2i.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      },
+      {
+        "id": "M.I2I",
+        "url": "https://platform.minimax.io/docs/api-reference/image-generation-i2i.md",
+        "access": "FULL",
+        "checkedDate": "2026-11-09"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "image-01",
+        "modes": {
+          "text_to_image": "YES",
+          "text_to_video": "N/A",
+          "first_frame": "N/A",
+          "first_last_frame": "N/A",
+          "multi_reference_images": "UNKNOWN：subject_reference为数组但未核硬张数；非通用多图融合"
+        },
+        "duration": "N/A：静态图片",
+        "resolution": "≤2048/边（自定义）",
+        "source_ids": [
+          "M.T2I",
+          "M.I2I"
+        ],
+        "limitations": "所有YES仅指本卡官方文件陈述；账户权限与真实行为未验证。UNKNOWN不得当作可启用能力。"
+      }
+    ]
+  },
+  {
+    "id": "M.I.H3",
+    "label": "MiniMax H3 Image · 国际",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.io",
+    "protocolId": "p1-01-M.I.H3",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/images/generations",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "同步 JSON /v1/images/generations 或 /v1/images/edits；单输出，非流式",
+    "notes": "H3图片独立协议；真实API及账户权限未验证。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.H3I",
+        "title": "MiniMax H3 Image",
+        "url": "https://platform.minimax.io/docs/guides/image-generation"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "MiniMax-H3-Image",
+        "modes": {
+          "text_to_image": "YES",
+          "image_reference": "YES"
+        },
+        "limitations": "仅官方研究，真实API NOT_RUN"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Image-Highspeed",
+        "modes": {
+          "text_to_image": "YES",
+          "image_reference": "YES"
+        },
+        "limitations": "仅官方研究，真实API NOT_RUN"
+      }
+    ]
+  },
+  {
+    "id": "M.I.H3.CN",
+    "label": "MiniMax H3 Image · 中国",
+    "providerName": "MiniMax Hailuo",
+    "kind": "ORIGINAL",
+    "baseUrl": "https://api.minimax.cn",
+    "protocolId": "p1-01-M.I.H3.CN",
+    "protocolVersion": "v1",
+    "region": "UNKNOWN",
+    "authType": "BEARER",
+    "path": "/v1/images/generations",
+    "mediaKinds": [
+      "IMAGE"
+    ],
+    "required": [],
+    "regionOptions": [],
+    "requestMapping": "同步 JSON /v1/images/generations 或 /v1/images/edits；单输出，非流式",
+    "notes": "H3图片独立协议；真实API及账户权限未验证。",
+    "evidence": "OFFICIAL_DOCS_RESEARCH_ONLY",
+    "checkedDate": "2026-11-11",
+    "matrixSha256": "054a8662c004f139ec2a7c91c7c73e90f10745738a9c52d3e9789e569ed75b96",
+    "sources": [
+      {
+        "id": "M.H3I",
+        "title": "MiniMax H3 Image",
+        "url": "https://platform.minimax.cn/docs/guides/image-generation"
+      }
+    ],
+    "realAPI": "NOT_RUN",
+    "capability": "UNKNOWN",
+    "modelReferences": [
+      {
+        "canonical_model_or_route": "MiniMax-H3-Image",
+        "modes": {
+          "text_to_image": "YES",
+          "image_reference": "YES"
+        },
+        "limitations": "仅官方研究，真实API NOT_RUN"
+      },
+      {
+        "canonical_model_or_route": "MiniMax-H3-Image-Highspeed",
+        "modes": {
+          "text_to_image": "YES",
+          "image_reference": "YES"
+        },
+        "limitations": "仅官方研究，真实API NOT_RUN"
+      }
+    ]
+  }
+]

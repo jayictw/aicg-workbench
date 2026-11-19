@@ -1,0 +1,2 @@
+# Prevent platform newline conversion from changing reviewed staged bytes.
+* -text

@@ -1,0 +1,11 @@
+{
+  "contractVersion": 1,
+  "canonicalModel": "dreamina-seedance-2-5-260628",
+  "endpointId": null,
+  "region": "ap-southeast-1",
+  "apiDomain": "ark.ap-southeast.bytepluses.com",
+  "apiPath": "/api/v3/contents/generations/tasks",
+  "source": "INSTALLATION_UNCONFIGURED",
+  "projectIdentityVerified": false,
+  "currentEndpointModelVerified": false
+}

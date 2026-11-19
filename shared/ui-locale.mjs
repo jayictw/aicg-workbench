@@ -1,0 +1,27 @@
+import {messages} from './ui-messages.mjs';
+export {messages};
+export const UI_LANGUAGES=Object.freeze(['zh-CN','en']);
+export const LOCALE_KEY='aicg.ui.language.v1';
+export function createLocaleStore(storage){
+ let language='zh-CN';try{const saved=storage?.getItem(LOCALE_KEY);if(UI_LANGUAGES.includes(saved))language=saved;}catch{}
+ let lastPersisted=null;const listeners=new Set();return Object.freeze({getPersistenceState:()=>lastPersisted,getSnapshot:()=>language,subscribe:fn=>{listeners.add(fn);return()=>listeners.delete(fn);},setLanguage:next=>{if(!UI_LANGUAGES.includes(next))throw Error('UI_LOCALE');let persisted=true;try{if(!storage)persisted=false;else storage.setItem(LOCALE_KEY,next);}catch{persisted=false;}lastPersisted=persisted;if(language!==next){language=next;for(const fn of listeners)fn();}return {language,persisted};}});
+}
+let storage;try{storage=globalThis.localStorage;}catch{}
+export const localeStore=createLocaleStore(storage);
+// Exact catalogue lookup only: interpolation values are opaque and never translated recursively.
+export function translate(language,key,values={}){const source=String(key??''),message=messages[source]?.[language]??source;return message.replace(/\{([A-Za-z0-9_]+)\}/g,(all,name)=>Object.hasOwn(values,name)?String(values[name]):all);}
+const ownedPatterns=[[/^本批已放入\s*(\d+)／(\d+)\s*張；仍須手動保存工程$/,'Placed {count}/{total} images; save the project manually',['count','total']],[/^(?:另存完成：|已另存：)(.+)$/,'Saved as: {name}',['name']],[/^已錄入 (.+)；按「套用鍵位」才會修改$/,'Captured {binding}; use Apply shortcut to change it',['binding']],[/^本批已放入\s*(\d+)\s*張；仍須手動保存工程$/,'Placed {count} images; save the project manually',['count']],[/^已複製\s*(\d+)\s*個框；集合內連線保留、框外輸入未複製，原選取保留 · 請手動保存$/,'Duplicated {count} cards. Internal links retained; external inputs excluded. Save manually.',['count']],[/^上次媒體下載受拒（HTTP (\d{3})）$/,'上次媒體下載受拒（HTTP {status}）',['status']],[/^已保存版本 (\d+) · 磁盘回执 (.+)$/,'已保存版本 {revision} · 磁盘回执 {receipt}',['revision','receipt']],[/^已切換至 (.+) 機位；尚未套用構圖。$/,'已切換至 {view} 機位；尚未套用構圖。',['view']]];
+export const ui=(key,values)=>{if(key==null)return key;const raw=String(key);if(!Object.hasOwn(messages,raw)){for(const [pattern,target,names]of ownedPatterns){const m=raw.match(pattern);if(m){const args=Object.fromEntries(names.map((n,i)=>[n,m[i+1]]));if(target==='Saved as: {name}')args.name=String(args.name).split(/[\\/]/).at(-1);if(target.startsWith('已切換至'))args.view=translate(localeStore.getSnapshot(),args.view);return translate(localeStore.getSnapshot(),target,args);}}}return translate(localeStore.getSnapshot(),raw,values);};
+// Receive React explicitly so the same pure locale module works in native UI and isolated tests.
+export function useUiLocale(React){const [language,setLanguage]=React.useState(localeStore.getSnapshot);React.useEffect(()=>{const refresh=()=>setLanguage(localeStore.getSnapshot());const off=localeStore.subscribe(refresh);refresh();return off;},[]);return language;}
+
+function documentLanguage(){if(typeof document!=='undefined'&&document.documentElement){document.documentElement.lang=localeStore.getSnapshot();document.title=localeStore.getSnapshot()==='en'?'AICG Workbench':'AICG 工作台';}}
+localeStore.subscribe(documentLanguage);documentLanguage();
+// This is a display-only second mask over existing host-sanitized diagnostics, never an additional data source.
+export function sanitizeUiDetails(value){const seen=new WeakSet();const visit=(v,key='')=>{if(/^(authorization|cookie|password|secret|api[_-]?key|access[_-]?token|refresh[_-]?token|credential)$/i.test(key))return '[redacted]';if(typeof v==='string')return v.replace(/https?:\/\/[^\s<>"']+/gi,'[private URL]').replace(/\b(?:sk|sk-proj)-[A-Za-z0-9_-]{8,}/g,'[redacted]').replace(/\bBearer\s+[^\s"']+/gi,'Bearer [redacted]').replace(/[A-Za-z]:[\\/][^\r\n<>"']+/g,'[local path]');if(v&&typeof v==='object'){if(seen.has(v))return '[circular]';seen.add(v);const out=Array.isArray(v)?v.map(x=>visit(x)):Object.fromEntries(Object.entries(v).map(([k,x])=>[k,visit(x,k)]));seen.delete(v);return out;}return v;};const safe=visit(value);return typeof safe==='string'?safe:JSON.stringify(safe,null,2);}
+export function uiDetails(React,value,summary='Diagnostics'){return React.createElement('details',{className:'ui-diagnostics'},React.createElement('summary',null,ui(summary)),React.createElement('pre',null,sanitizeUiDetails(value)));}
+export function uiErrorSummary(message,code=''){const raw=String(message??''),known=Object.hasOwn(messages,raw),unknown=/UNKNOWN|UNCERTAIN|RECEIPT/.test(String(code)+' '+raw);return (known?ui(raw):ui('Operation did not finish. Your input and previous results are preserved.'))+(unknown?' '+ui('Check the original operation before trying again. An unknown receipt must not be resubmitted.'):'');}
+export function uiError(React,message,code=''){const raw=String(message??'');return React.createElement('div',{className:'ui-error-message'},uiErrorSummary(raw,code),uiDetails(React,{code:code||undefined,message:raw}));}
+
+// App-owned feedback only. Opaque project text never passes through this renderer.
+export function uiFeedback(React,message,error=false){const raw=String(message??'');if(!raw)return '';const known=Object.hasOwn(messages,raw)||ownedPatterns.some(([pattern])=>pattern.test(raw));if(known&&!/^[A-Z][A-Z0-9_]+$/.test(raw))return ui(raw);return React.createElement('div',{className:error?'ui-error-message':'ui-status-message'},error?uiErrorSummary(raw):ui('Review the operation details before continuing.'),uiDetails(React,{message:raw}));}

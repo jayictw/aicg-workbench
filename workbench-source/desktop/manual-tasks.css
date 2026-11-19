@@ -1,0 +1,2 @@
+@import url('manual-app://app/base.css');
+.manual-task{padding:14px 0;border-bottom:1px solid #465451}.manual-task h2{margin:4px 0}.manual-task button{margin:4px 12px 4px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}#reference{max-width:480px;width:100%;height:auto}#hold{font-weight:600}#preview{padding-top:20px}

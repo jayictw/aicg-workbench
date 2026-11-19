@@ -1,0 +1,28 @@
+const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),{spawn}=require('node:child_process');
+const BASE=path.resolve(__dirname,'..');
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const error=(code,message)=>Object.assign(new Error(message),{code});
+const FORMATS={'.png':['image','image/png',32],'.jpg':['image','image/jpeg',32],'.jpeg':['image','image/jpeg',32],'.webp':['image','image/webp',32],'.mp4':['video','video/mp4',128],'.wav':['audio','audio/wav',64],'.mp3':['audio','audio/mpeg',64],'.txt':['text','text/plain',0.25]};
+function decodeTimeout({type,durationMs}){return type==='image'?10000:Math.min(120000,Math.max(10000,(Number.isFinite(durationMs)?durationMs:0)+10000));}
+function run(name,args,timeout=10000){return new Promise((resolve,reject)=>{const p=spawn(require('./external-tools.cjs').resolveTool(name).path,args,{windowsHide:true,stdio:['ignore','pipe','pipe']});let out='',err='';const timer=setTimeout(()=>{p.kill();reject(error('IMPORT_TIMEOUT',`本地媒体${name==='ffprobe'?'探测':'完整解码'}超过 ${timeout/1000} 秒，已中止；原文件保留`));},timeout);p.stdout.on('data',b=>{out+=b;if(out.length>2e6)p.kill();});p.stderr.on('data',b=>{err=(err+b).slice(-6000);});p.on('error',e=>{clearTimeout(timer);reject(error('PROBE_UNAVAILABLE','本候选媒体探测工具无法启动：'+e.message));});p.on('close',code=>{clearTimeout(timer);if(code===0)resolve(out);else reject(error('IMPORT_DECODE','媒体无法完整解码或编码不支持，请重新导出支持的格式'));});});}
+async function inspect(file){
+ const ext=file.endsWith('.mp4.part')?'.mp4':path.extname(file).toLowerCase(),fmt=FORMATS[ext];if(!fmt)throw error('IMPORT_FORMAT','仅接受 PNG／JPEG／静态 WebP、H.264 MP4、PCM WAV／MP3 和 UTF-8 TXT');
+ const stat=await fs.stat(file);if(!stat.isFile()||stat.size===0)throw error('IMPORT_EMPTY','文件为空或不是普通文件');if(stat.size>fmt[2]*1024*1024)throw error('IMPORT_SIZE',`此格式单文件上限 ${fmt[2]} MiB`);
+ const b=await fs.readFile(file),[type,mime]=fmt;let magic=false;
+ if(ext==='.png'){magic=b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));let at=8;while(magic&&at+12<=b.length){const len=b.readUInt32BE(at);if(b.toString('ascii',at+4,at+8)==='acTL')throw error('IMPORT_ANIMATION','静态图像不接受 APNG 动画');at+=len+12;}}
+ if(['.jpg','.jpeg'].includes(ext))magic=b[0]===255&&b[1]===216&&b[2]===255;
+ if(ext==='.webp'){magic=b.toString('ascii',0,4)==='RIFF'&&b.toString('ascii',8,12)==='WEBP';if(b.toString('ascii',12,16)==='VP8X'&&(b[20]&2))throw error('IMPORT_ANIMATION','静态图像不接受动画 WebP');}
+ if(ext==='.mp4')magic=b.toString('ascii',4,8)==='ftyp';
+ if(ext==='.wav')magic=b.toString('ascii',0,4)==='RIFF'&&b.toString('ascii',8,12)==='WAVE';
+ if(ext==='.mp3')magic=b.toString('ascii',0,3)==='ID3'||b[0]===255&&(b[1]&224)===224;
+ if(type==='text'){let text;try{text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(b);}catch{throw error('IMPORT_UTF8','TXT 必须是有效 UTF-8');}if(text.includes('\0')||text.length>32000||/[\u0001-\u0008\u000e-\u001f]/.test(text))throw error('IMPORT_TEXT','文本含二进制控制字符或超过 32000 字符');return {type,mime,ext,size:b.length,sha256:hash(b),text};}
+ if(!magic)throw error('IMPORT_SIGNATURE','后缀与文件内容不符，拒绝导入');
+ const probe=JSON.parse(await run('ffprobe',['-v','error','-protocol_whitelist','file,pipe','-show_format','-show_streams','-of','json',file]));const streams=probe.streams??[],videos=streams.filter(s=>s.codec_type==='video'),audios=streams.filter(s=>s.codec_type==='audio');let metadata={};
+ if(type==='image'){const v=videos[0];const codecs={'.png':'png','.jpg':'mjpeg','.jpeg':'mjpeg','.webp':'webp'};if(videos.length!==1||audios.length||v.codec_name!==codecs[ext])throw error('IMPORT_CODEC','图像编码与格式不符');if(!v.width||!v.height)throw error('IMPORT_DECODE','图像没有可解码的有效画面');if(v.width>8192||v.height>8192||v.width*v.height>24e6||v.width<1||v.height<1)throw error('IMPORT_PIXELS','图像上限：每边 8192、总像素 24 MP');metadata={width:v.width,height:v.height,codec:v.codec_name};}
+ else if(type==='video'){const v=videos[0],duration=Number(probe.format.duration),[num,den]=String(v?.avg_frame_rate??'0/1').split('/').map(Number),fps=num/den;if(videos.length!==1||audios.length>1||streams.length!==videos.length+audios.length||v?.codec_name!=='h264'||!['yuv420p','yuvj420p'].includes(v.pix_fmt)||audios.some(a=>a.codec_name!=='aac'))throw error('IMPORT_CODEC','MP4 仅接受 H.264 8bit 4:2:0，可选单条 AAC 音轨；HEVC／其他流不支持');if(!Number.isFinite(duration)||duration<=0||!Number.isSafeInteger(v.width)||!Number.isSafeInteger(v.height)||v.width<1||v.height<1||Math.max(v.width,v.height)>3840||Math.min(v.width,v.height)>2160||!Number.isFinite(fps)||fps<=0||fps>60)throw error('IMPORT_LIMIT','MP4 需完整解码；最长边3840、最短边2160、60 fps，支持直式或横式');metadata={durationMs:Math.round(duration*1000),width:v.width,height:v.height,fps,codec:v.codec_name,pixelFormat:v.pix_fmt,audioCodec:audios[0]?.codec_name??null};}
+ else {const a=audios[0],duration=Number(probe.format.duration);if(videos.length||audios.length!==1||streams.length!==1||!a||!(ext==='.wav'?['pcm_s16le','pcm_s24le']:['mp3']).includes(a.codec_name))throw error('IMPORT_CODEC','WAV 仅接受 PCM16/24；MP3 须为真实 MP3 音频');if(!Number.isFinite(duration)||duration<=0||a.channels>2||Number(a.sample_rate)<8000||Number(a.sample_rate)>48000)throw error('IMPORT_LIMIT','音频需完整解码；双声道、8–48 kHz');metadata={durationMs:Math.round(duration*1000),channels:a.channels,sampleRate:Number(a.sample_rate),codec:a.codec_name};}
+ // Decode every frame/sample after the bounded header checks; no output file and no network inputs.
+ await run('ffmpeg',['-v','error','-xerror','-threads','2','-protocol_whitelist','file,pipe','-i',file,'-map','0:v?','-map','0:a?','-f','null','-'],decodeTimeout({type,...metadata}));
+ return {type,mime,ext,size:b.length,sha256:hash(b),...metadata};
+}
+module.exports={inspect,hash,FORMATS,run,error,decodeTimeout};

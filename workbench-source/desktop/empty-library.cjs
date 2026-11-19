@@ -1,0 +1,3 @@
+// Only a new formal library uses this explicit empty DTO. No browser/session import.
+function emptyDTO(){return {schemaVersion:5,business:{generated:{version:1,drafts:[],requests:[],results:[]},workspace:{stages:{},projects:[],tasks:[],images:{},videos:{},activeImage:null,activeVideo:null,assets:[],entities:[],storyboards:{},storyboardLinks:[],storyboardReceipts:{},storyboardUpdates:{},stagePickReceipts:{}},maps:{receipts:[],latest:[],handoffDigests:[],storyboardAttempts:[],updateAttempts:[]},stageDrafts:[],stageWork:[],ui:{route:'#/settings',theme:'light',editors:{}}},registries:{subjects:{},backdrops:{}},media:[]}}
+module.exports={emptyDTO};

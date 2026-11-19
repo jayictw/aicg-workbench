@@ -1,0 +1,14 @@
+const fs=require('node:fs'),path=require('node:path'),{hash,error}=require('./media.cjs');
+class ImageJournal{
+ constructor(root){this.file=path.join(root,'image-submissions.json');this.data={version:1,mode:'offline-only',limitMinor:120,unitMinor:12,currency:'CNY',actualChargedMinor:0,attempts:{}};if(fs.existsSync(this.file)){try{this.data=JSON.parse(fs.readFileSync(this.file,'utf8'));if(this.data.version!==1||this.data.mode!=='offline-only'||!this.data.attempts||!Number.isInteger(this.data.limitMinor)||!Number.isInteger(this.data.unitMinor))throw Error();}catch{throw error('IMAGE_JOURNAL','提交日誌無法核對；保留原件，禁止重送');}}}
+ write(){const tmp=this.file+'.tmp',fd=fs.openSync(tmp,'w');try{fs.writeFileSync(fd,JSON.stringify(this.data,null,2));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}fs.renameSync(tmp,this.file);}
+ reserve(run,proof){if(this.failed)throw error('IMAGE_JOURNAL','提交日誌寫入曾失敗，禁止繼續提交；請保留原件');const digest=hash(JSON.stringify(proof)),old=this.data.attempts[run.id];if(old){if(old.digest!==digest)throw error('IMAGE_IDEMPOTENCY','原操作身份不符合這份請求');return old;}
+  if(!Number.isSafeInteger(this.data.unitMinor)||this.data.unitMinor<=0)throw error('PRICE_UNKNOWN','價格未知，禁止當零');
+  if(Object.values(this.data.attempts).some(a=>a.nodeId===run.nodeId&&['reserved','submitted','submissionUnknown'].includes(a.state)))throw error('IMAGE_UNKNOWN_PENDING','原操作仍在進行或未知；先查原操作，禁止新提交');
+  const used=Object.values(this.data.attempts).reduce((sum,a)=>sum+a.reservedMinor,0);if(used+this.data.unitMinor>this.data.limitMinor)throw error('BUDGET_LIMIT','已達離線預算演練上限；未送出');
+  const before=structuredClone(this.data);this.data.attempts[run.id]={runId:run.id,commandId:run.commandId??null,submissionId:run.submissionId,nodeId:run.nodeId,projectId:run.projectId,graphId:run.graphId,snapshotHash:run.snapshotHash,digest,proof,reservedMinor:this.data.unitMinor,state:'reserved',submissions:0,actualChargedMinor:0};try{this.write();}catch(e){this.data=before;this.failed=true;throw error('IMAGE_JOURNAL','提交預留無法可靠寫入，沒有送出；請保留原件');}return this.data.attempts[run.id];}
+ update(id,patch){if(this.failed)throw error('IMAGE_JOURNAL','提交日誌曾寫入失敗，禁止繼續');const old=this.data.attempts[id];if(!old)throw error('IMAGE_JOURNAL','原提交不存在');const before=structuredClone(this.data);Object.assign(old,patch);try{this.write();}catch(e){this.data=before;this.failed=true;throw e;}return old;}
+ submitted(id){const a=this.data.attempts[id];if(!a||a.submissions)throw error('IMAGE_DUPLICATE','原提交已送出，禁止重送');return this.update(id,{state:'submitted',submissions:1});}
+ query(id){const a=this.data.attempts[id];return a?{...structuredClone(a),automaticRetry:false,providerLookup:'not-supported-for-synchronous-images',message:a.state==='submissionUnknown'?'原同步生圖提交仍未知；沒有可核實的任務查詢端點，不重新送出':'已讀取原提交日誌'}:{state:'not-found',automaticRetry:false};}
+}
+module.exports={ImageJournal};

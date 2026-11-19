@@ -1,0 +1,55 @@
+import * as T from 'three';
+import { createMannequin, applyPose } from './mannequin.mjs';
+import { verifiedPose, libraryLimits } from './pose-library-state.mjs';
+import { poseLibraryMetrics as metrics, publishLibraryMetrics } from './pose-library-metrics.mjs';
+let queue = Promise.resolve();
+function dispose(object) { const resources = new Set(); object.traverse(o => { const m = o; if (m.geometry)
+    resources.add(m.geometry); for (const material of Array.isArray(m.material) ? m.material : m.material ? [m.material] : [])
+    resources.add(material); }); resources.forEach(r => r.dispose()); }
+export function renderPoseThumbnail(pose) { const snapshot = verifiedPose(pose); metrics.thumbnailQueued++; publishLibraryMetrics(); const job = queue.then(async () => { metrics.thumbnailQueued--; const scene = new T.Scene(), canvas = document.createElement('canvas'); let renderer; try {
+    const rig = createMannequin();
+    applyPose(rig, snapshot);
+    for (const marker of Object.values(rig.markers)) {
+        marker.removeFromParent();
+        dispose(marker);
+    }
+    scene.add(rig.object);
+    scene.background = new T.Color(0xe1e6e3);
+    scene.add(new T.HemisphereLight(0xffffff, 0x7a8c83, 2.6));
+    const key = new T.DirectionalLight(0xffffff, 3.2);
+    key.position.set(3, 5, 4);
+    scene.add(key);
+    scene.updateMatrixWorld(true);
+    const sphere = new T.Box3().setFromObject(rig.object).getBoundingSphere(new T.Sphere()), camera = new T.PerspectiveCamera(35, 4 / 3, .01, 100), distance = sphere.radius / Math.sin(T.MathUtils.degToRad(17.5)) * 1.18;
+    camera.position.copy(sphere.center).add(new T.Vector3(.8, .25, 1).normalize().multiplyScalar(distance));
+    camera.lookAt(sphere.center);
+    renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: false, preserveDrawingBuffer: true });
+    metrics.thumbnailCreated++;
+    metrics.thumbnailActive++;
+    metrics.thumbnailMaxActive = Math.max(metrics.thumbnailMaxActive, metrics.thumbnailActive);
+    publishLibraryMetrics();
+    renderer.setPixelRatio(1);
+    renderer.setSize(256, 192, false);
+    renderer.outputColorSpace = T.SRGBColorSpace;
+    renderer.toneMapping = T.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+    renderer.render(scene, camera);
+    const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('缩图编码失败；姿势资料仍保留。')), 'image/png'));
+    if (blob.size > libraryLimits.thumbnailBytes)
+        throw new Error('缩图超过96KiB，未作为成功缩图保存。');
+    return blob;
+}
+finally {
+    dispose(scene);
+    scene.clear();
+    if (renderer) {
+        renderer.renderLists.dispose();
+        renderer.dispose();
+        renderer.forceContextLoss();
+        metrics.thumbnailDisposed++;
+        metrics.thumbnailActive--;
+    }
+    canvas.width = 1;
+    canvas.height = 1;
+    publishLibraryMetrics();
+} }); queue = job.catch(() => { }); return job; }

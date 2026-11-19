@@ -1,0 +1,26 @@
+import {ui,useUiLocale} from '../shared/ui-locale.mjs';
+import {CardVideo} from './CardVideo';
+import React,{useEffect,useState} from 'react';
+import {Handle,Position} from '@xyflow/react';
+import {Film,Download,FolderOpen,SlidersHorizontal,Play,Square} from 'lucide-react';
+type Any=Record<string,any>;
+export function CompositionNode({data,selected}:{data:Any,selected:boolean}){useUiLocale(React);
+ const n=data.node,p=n.payload,g=data.graph,s=data.composition??{},job=s.job,active=job&&['queued','encoding','validating','publishing'].includes(job.status),[versionId,setVersion]=useState(p.currentVersionId),[mediaError,setMediaError]=useState(false);
+ useEffect(()=>setVersion(p.currentVersionId),[p.currentVersionId,data.rootLabel]);useEffect(()=>setMediaError(false),[versionId]);
+ const version=p.versions.find((v:Any)=>v.id===versionId)??s.version,media=version&&g.mediaVersions[version.mediaVersionId],old=version&&version.id!==p.currentVersionId,location=version?(s.locationsByVersion?.[version.id]??data.locations):null;
+ const text=active?(job.status==='validating'?'核對成片':job.status==='publishing'?'完成落盤中':'合併中 '+job.progress+'%'):job?.status==='cancelled'?'已取消 · 原成片保留':job?.status==='failed'?'合併失敗 · 原成片保留':s.stale?'編排或來源已變更':version?'成片已完成':'等待合併';
+ return <article className={'composition-node '+(selected?'selected':'')} aria-label={((n.humanCode+'｜')+n.label)}>
+  <header><span><Film size={15}/>{n.humanCode}</span><small>{ui("合併成片 · 離線")}</small></header><h3 title={n.label}>{n.label}</h3><div className="composition-order" aria-label={(n.humanCode+" "+ui("保存的播放順序"))}>{p.edit.clips.map((c:Any,i:number)=><span key={c.id}>{(i+1)} · {(g.nodes.find((n:Any)=>n.id===c.nodeId)?.humanCode??ui("缺來源"))}</span>)}</div>
+  <div className="composition-video nowheel">{mediaError?<div role="alert"><p>{ui("已保存成片缺失或無法讀取。")}<br/>{ui("請恢復相同原字節；不會自動重編。")}</p><button onClick={()=>setMediaError(false)}>{ui("重新讀取")}</button></div>:media?<CardVideo key={media.sha256} src={'canvas://media/'+version.mediaVersionId} name={n.humanCode+' 成片播放'} onError={()=>setMediaError(true)}/>:<div><Film size={32}/><p>{ui("依保存的播放順序")}<br/>{ui("合併為一支 MP4")}</p></div>}</div>
+  <div className={'composition-status '+(s.stale?'stale':'')} role="status">{old ? ui("正在查看舊版成片") : text}{(media&&<span>{(media.durationMs/1000).toFixed(2)}s · {media.width}×{media.height}</span>)}</div>
+  {active&&<div className="composition-progress"><progress value={job.progress} max="100"/><button aria-label={(n.humanCode+" "+ui("取消合併"))} onClick={()=>data.cancelComposition(job.requestId)}><Square size={12}/>{ui("取消")}</button></div>}
+  {!active&&(job?.error||job?.attachError)&&<p className="composition-warning">{(job.attachError?.message??job.error.message)}</p>}
+  {s.unknownJob&&<p className="composition-warning">{ui("此副本沒有上次編碼記錄；已保存成片仍可播放，不會自動重送。")}</p>}
+  <div className="composition-actions nowheel"><button className="primary" disabled={active||data.hasAnyDraft||data.busy||data.anyEncoding} onClick={()=>data.startComposition(n.id,!!s.sourceChanged)}><Play size={14}/>{s.sourceChanged ? ui("更新來源並合併") : version ? ui("合併更新") : ui("一鍵合併")}</button><button aria-label={(n.humanCode+" "+ui("排序裁切音量"))} onClick={()=>data.inspectComposition(n.id)}><SlidersHorizontal size={14}/>{ui("設定")}</button><button aria-label={(n.humanCode+" "+ui("更多操作"))} onClick={data.openQuickMenu}>{ui("更多操作")}</button></div>
+  <div className="composition-actions nowheel"><button disabled={!version||data.busy} data-composition-file-action="save-as" data-composition-node-id={n.id} data-composition-version-id={version?.id} onClick={()=>data.saveComposition(n.id,version.id)}><Download size={14}/>{ui("另存到…")}</button><button disabled={!version||data.busy} data-composition-file-action="reveal" data-composition-node-id={n.id} data-composition-version-id={version?.id} onClick={()=>data.revealComposition(n.id,version.id)}><FolderOpen size={14}/>{ui("開啟所在資料夾")}</button></div>
+  {version&&<p className="composition-location" title={(location?.lastSavedPath??location?.projectPath)}>{ui("存放：")}{((location?.lastSavedPath??location?.projectPath)??ui("專案內（位置待核對）"))}</p>}
+  <p className="composition-save-note">{data.projectDirty ? ui("畫布編排／來源關係尚未手動保存") : ui("編排及來源關係已保存")}{version ? " "+ui("· 成片檔已落盤") : ''}</p>
+  {p.versions.length>1&&<details className="composition-history nowheel"><summary>{ui("保留")+" "}{p.versions.length} {" "+ui("個成片版本")}</summary>{p.versions.map((v:Any,i:number)=><button key={v.id} onClick={()=>setVersion(v.id)}>{(i+1)}. {(g.mediaVersions[v.mediaVersionId].durationMs/1000).toFixed(2)}s{v.id===p.currentVersionId ? " "+ui("· 最新成片") : ''}</button>)}</details>}
+  {n.ports.map((port:Any)=>{const input=port.direction==='in',top=port.key==='clips'?'30%':port.key==='audio'?'70%':'50%';return <div className={'node-port '+port.direction} key={port.id} style={{top}}><Handle id={port.id} type={input?'target':'source'} position={input?Position.Left:Position.Right} aria-label={((n.humanCode+' ')+(port.key==='clips' ? ui("播放來源") : port.key==='audio' ? ui("配樂來源") : ui("成片輸出")))}/><span className="port-caption">{port.key==='clips' ? ui("播放來源") : port.key==='audio' ? ui("配樂") : ui("成片")}</span></div>;})}
+ </article>;
+}

@@ -1,0 +1,7 @@
+/* Only the effective-input status and the existing confirmation dialog. */
+:root .round1-workbench.wb-workbench.wb-video .original-generate-footer>p[data-video-send-summary]{display:block;color:var(--ink);font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+.video-combined-confirm{overflow:auto;max-height:90vh}
+.video-combined-confirm [data-video-actual-reference]{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+.video-combined-confirm [data-video-actual-reference] img{max-width:30%;height:110px;object-fit:contain}
+.video-combined-confirm figcaption{font-size:12px;overflow-wrap:anywhere;min-width:0}
+.video-combined-confirm pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}

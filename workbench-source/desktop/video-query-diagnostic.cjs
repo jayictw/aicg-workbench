@@ -1,0 +1,17 @@
+'use strict';
+// Only closed enums, bounded numbers and provider request identifiers cross this boundary.
+const STAGES=['complete','connect','read','http','json','response-fields','source-validation','local-context','preflight'];
+const FIELDS=['resolution','ratio','duration','framespersecond','generate_audio','body','content-type','content-encoding','content-length','id','model','status','content','content.video_url','signature-expiry','response-proof','credential-ref','context'];
+const TYPES=['missing','null','array','object','string','number','boolean','other'];
+const CODES=['OK','CONNECT_TIMEOUT','READ_TIMEOUT','CONNECTION_ERROR','READ_ERROR','HTTP_ERROR','JSON_ERROR','FIELD_ERROR','SOURCE_ERROR','LOCAL_CONTEXT','PREFLIGHT_ERROR','RESPONSE_LIMIT','ENCODING_ERROR','MIME_ERROR'];
+function type(v){return v===undefined?'missing':v===null?'null':Array.isArray(v)?'array':TYPES.includes(typeof v)?typeof v:'other'}
+function make({stage='preflight',code='PREFLIGHT_ERROR',at=Date.now(),elapsedMs=0,httpStatus=null,providerCode=null,requestId=null,providerStatus=null,rejected=[],disposition='error',urlSource}={}){
+ const d={version:1,stage:STAGES.includes(stage)?stage:'preflight',code:CODES.includes(code)?code:'PREFLIGHT_ERROR',at:Number.isSafeInteger(at)&&at>=0?at:Date.now(),elapsedMs:Number.isSafeInteger(elapsedMs)?Math.max(0,Math.min(1200000,elapsedMs)):0,httpStatus:Number.isSafeInteger(httpStatus)&&httpStatus>=100&&httpStatus<=599?httpStatus:null,providerCode:null,requestId:null,providerStatus:['queued','running','succeeded','failed','expired','cancelled'].includes(providerStatus)?providerStatus:null,rejected:[],disposition:['accepted','error','ignored-after-stop'].includes(disposition)?disposition:'error'};
+ // provider-errors admits only known provider codes and request IDs with a numeric prefix.
+ const p=require('./provider-errors.cjs');const safe=p.capture(Buffer.from(JSON.stringify({error:{code:providerCode},request_id:requestId})),{status:d.httpStatus||500});d.providerCode=safe.code;d.requestId=safe.requestId;
+ d.rejected=rejected.slice(0,6).filter(x=>x&&FIELDS.includes(x.field)&&TYPES.includes(x.type)).map(x=>({field:x.field,type:x.type}));if(urlSource!==undefined)d.urlSource=require('./video-url-source.cjs').clean(urlSource);return d;
+}
+function valid(d){try{return require('./d1-json.cjs').same(d,make(d))}catch{return false}}
+function error(stage,code,field,value){const e=Object.assign(Error('C_VIDEO_QUERY_DIAGNOSTIC'),{code:'C_VIDEO_QUERY_DIAGNOSTIC'});e.queryDiagnostic=make({stage,code,rejected:field?[{field,type:type(value)}]:[]});return e}
+function from(error,context={}){const map={C_VIDEO_CONNECT_TIMEOUT:['connect','CONNECT_TIMEOUT'],C_VIDEO_READ_TIMEOUT:['read','READ_TIMEOUT'],C_VIDEO_CONNECTION_ERROR:['connect','CONNECTION_ERROR'],C_VIDEO_READ_ERROR:['read','READ_ERROR'],C_VIDEO_QUERY_TIMEOUT:['read','READ_TIMEOUT'],C_VIDEO_NETWORK_STATUS:['http','HTTP_ERROR'],C_VIDEO_NETWORK_ENCODING:['http','ENCODING_ERROR'],C_VIDEO_NETWORK_MIME:['http','MIME_ERROR'],C_VIDEO_DOWNLOAD_LIMIT:['read','RESPONSE_LIMIT'],C_VIDEO_UNTRUSTED_RESPONSE:['source-validation','SOURCE_ERROR'],C_VIDEO_OBSERVATION_EXPIRED:['local-context','LOCAL_CONTEXT'],C_VIDEO_CONTEXT:['local-context','LOCAL_CONTEXT']};const m=map[error?.code]||['preflight','PREFLIGHT_ERROR'];return make({...error?.queryDiagnostic,...(!error?.queryDiagnostic?{stage:m[0],code:m[1]}:{}),...context})}
+module.exports={make,valid,error,from,type};

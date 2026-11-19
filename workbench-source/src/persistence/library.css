@@ -1,0 +1,9 @@
+.library-gate{max-width:860px;margin:12vh auto;padding:40px;color:var(--text)}.library-gate>div,.library-actions{display:flex;gap:12px;flex-wrap:wrap}.library-gate p,.library-settings p{line-height:1.8;color:var(--muted)}.library-status{font-size:12px;color:var(--accent);white-space:nowrap;text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:20px}.library-settings{max-width:960px;margin:32px auto;padding:24px}.library-settings dd{overflow-wrap:anywhere;margin:8px 0 20px}.library-settings dt{font-weight:600}.library-settings [role=status]{min-height:40px;overflow-wrap:anywhere}
+.m7-workbench-save{display:flex;align-items:flex-end;flex-direction:column;gap:3px;max-width:265px}.m7-workbench-save small{font-size:11px;color:var(--muted);max-width:265px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.library-selection{padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:20px}.library-selection-dialog{max-width:min(760px,90vw)}.library-selection-dialog dd{overflow-wrap:anywhere;margin:6px 0 14px}.library-selection-dialog .library-actions{margin:16px 0}.library-selection-dialog>button{margin:12px 12px 0 0}.library-selection-dialog p{line-height:1.65}
+
+
+/* Keep every verified format row available; long paths scroll the dialog, never compress its data grid. */
+.library-selection-dialog{max-height:calc(100dvh - 40px);overflow-y:auto;overscroll-behavior:contain}
+.library-selection-dialog>*{flex-shrink:0}

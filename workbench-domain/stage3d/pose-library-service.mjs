@@ -1,0 +1,49 @@
+import { changedRecord, encodePoses, libraryError } from './pose-library-state.mjs';
+import { poseRepository, poseScope } from './pose-library-storage.mjs';
+import { renderPoseThumbnail } from './pose-thumbnail.mjs';
+import { posePreset } from './pose-state.mjs';
+import { libraryUrl, revokeLibraryUrl } from './pose-library-metrics.mjs';
+export const poseLibraryEvent = 'acs-pose-library-changed';
+export function announceLibrary(error = '') { window.dispatchEvent(new CustomEvent(poseLibraryEvent, { detail: { error } })); }
+const jobs = new Map();
+export function buildStoredThumbnail(record) { const scope = poseScope(), signature = JSON.stringify(record.pose), key = scope + record.id + signature, previous = jobs.get(key); if (previous)
+    return previous; const job = (async () => { try {
+    const blob = await renderPoseThumbnail(record.pose);
+    if (poseScope() !== scope)
+        return;
+    for (let attempt = 0; attempt < 3; attempt++) {
+        const current = (await poseRepository.list()).find(r => r.id === record.id);
+        if (poseScope() !== scope || !current || JSON.stringify(current.pose) !== signature)
+            return;
+        try {
+            await poseRepository.replace(changedRecord(current, { thumbnail: { status: 'ready', blob } }), current.revision);
+            announceLibrary();
+            return;
+        }
+        catch (e) {
+            if (attempt === 2 || !(e instanceof Error) || !e.message.includes('另一处更新'))
+                throw e;
+        }
+    }
+}
+catch (e) {
+    if (poseScope() !== scope)
+        return;
+    const message = libraryError(e);
+    try {
+        const current = (await poseRepository.list()).find(r => r.id === record.id);
+        if (poseScope() !== scope || !current || JSON.stringify(current.pose) !== signature)
+            return;
+        await poseRepository.replace(changedRecord(current, { thumbnail: { status: 'error', message: message.slice(0, 500) } }), current.revision);
+    }
+    catch { /* Data is already committed; a thumbnail-write failure cannot revoke the pose. */ }
+    announceLibrary(`姿势资料保留；缩图未完成：${message}`);
+}
+finally {
+    jobs.delete(key);
+} })(); jobs.set(key, job); return job; }
+const builtinBlobs = new Map(), builtinJobs = new Map();
+export function builtinThumbnail(id) { const cached = builtinBlobs.get(id); if (cached)
+    return Promise.resolve(cached); const job = builtinJobs.get(id); if (job)
+    return job; const next = renderPoseThumbnail(posePreset(id)).then(blob => { builtinBlobs.set(id, blob); return blob; }).finally(() => builtinJobs.delete(id)); builtinJobs.set(id, next); return next; }
+export function downloadPoses(records, label = '姿势库') { const blob = new Blob([encodePoses(records)], { type: 'application/json' }), url = libraryUrl(blob), a = document.createElement('a'); a.href = url; a.download = `acs-poses-${label.replace(/[^\p{L}\p{N}._-]/gu, '_').slice(0, 40)}.json`; a.click(); setTimeout(() => revokeLibraryUrl(url), 1000); }

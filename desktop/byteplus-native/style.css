@@ -1,0 +1,7 @@
+:root{font-family:system-ui,"Microsoft JhengHei",sans-serif;color:#e8e8ef;background:#16171e;color-scheme:dark}body{margin:0}main{padding:24px}h1{font-size:23px}p,section{line-height:1.65}label{display:block}input{display:block;box-sizing:border-box;width:100%;padding:12px;margin-top:9px;border:1px solid #616274;border-radius:7px}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto;background:#22242e;padding:12px}button{padding:11px 19px;margin:8px 8px 0 0;cursor:pointer;border:1px solid #616274;border-radius:7px}button[type=submit]{background:#6662db;color:#fff}#error{color:#ffaaa9}small{display:block;color:#b7b7c7}
+[hidden]{display:none!important}
+
+/* Shared workbench typography and accessible native-window flow. */
+body{font-family:"Segoe UI Variable","Segoe UI","Microsoft YaHei UI",sans-serif;font-size:14px;line-height:1.6;overflow:auto}button,input{font:inherit}button{min-height:36px;white-space:normal}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #34d399;outline-offset:3px}p,summary,pre,label{overflow-wrap:anywhere}main{min-width:0}details pre{white-space:pre-wrap;overflow-wrap:anywhere}button:disabled{cursor:not-allowed}
+
+.native-ui-language{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:12px}.native-ui-language select{font:inherit;min-height:36px;padding:6px 10px;border-radius:6px;border:1px solid #8a8a94;background:#242427;color:#fafafa}.native-ui-language select:focus-visible{outline:3px solid #34d399;outline-offset:3px}

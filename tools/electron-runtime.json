@@ -1,0 +1,27 @@
+{
+  "version": "45.0.0",
+  "platform": "win32-x64",
+  "source": "https://github.com/electron/electron/releases/tag/v45.0.0",
+  "files": {
+    "chrome_100_percent.pak": "8e865e7cd40faabcbfb4cd2be16ee290023c3a28796c4f95451440d80174225d",
+    "chrome_200_percent.pak": "352baed89a9051dc959dfa8e73024212ef98e173e37d0fc064887013748fcdca",
+    "d3dcompiler_47.dll": "f5c95e919b4ffa1ac71049cd45b9f986d2965e6888395ca2806337985334fa56",
+    "dxcompiler.dll": "6af17f483f97ca18b579da8475855469dde1b69b7e7872cae13bcbacc2d33200",
+    "electron.exe": "8e84549b05d27d444da2957653200d1e0ac287eff0fc5722b92835b9e0821a59",
+    "electron_wer.dll": "234b9aba3c2c5bb545dedb26783692ec90313a3e17a532ae7c514f8058adf117",
+    "ffmpeg.dll": "cdf2b70f0f0a97c9840af1466dd86a90e564c98f6892d783635cf9c3b303d613",
+    "icudtl.dat": "02a01b3188b6a41a756f7322fdb5e6b5ca6573b327b01dfc8ed662d571a6f769",
+    "LICENSE": "5154e165bd6c2cc0cfbcd8916498c7abab0497923bafcd5cb07673fe8480087d",
+    "LICENSES.chromium.html": "7dac8267ac6da8d959cfe88f5f055b18a397f10230380b5329125e167bf5639b",
+    "locales/en-US.pak": "de43db43fe0072543ab225f6d762cce3656a1639bf9e25f371fe0e80d9eabba7",
+    "locales/zh-CN.pak": "37abf1eacd32c638866147e9517b2a555d8a7dd2c0c79c05d09f877d9373b09a",
+    "resources/default_app.asar": "eac55d6cfcf4eab7e31a45356567f549ef7eb669e3699226b48a8492ad34f510",
+    "resources.pak": "a7b40d37892f0bb380b6735bdd9382ee69e9ca24dad1119bde5b53d55edb9b2b",
+    "snapshot_blob.bin": "008725a9d014f3942dd22b0b7ddbf01347576a1f92217b4de03bcac178a83427",
+    "v8_context_snapshot.bin": "2fc28f6396a571fb6490504aff0b0f767bce24105cad2489dcc3d53396df8a38",
+    "version": "281bb838d2512560c34bab2ceb5106a62f0fb0fe05f076896952a6153d007d94",
+    "vk_swiftshader.dll": "00d703c0557b54edf35c284b15cb0063de1653edef71d33c698a64d2e74073c9",
+    "vk_swiftshader_icd.json": "32d83ff113fef532a9f97e0d2831f8656628ab1c99e9060f0332b1532839afd9",
+    "vulkan-1.dll": "0802c28ebf8226fccaef45fc44b528873eb4814f714a817b01cc2f6ab49c24da"
+  }
+}

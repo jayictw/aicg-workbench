@@ -1,0 +1,1 @@
+ 'use strict';const brands=new WeakSet();let installed=null,taken=false;function brand(v){brands.add(v);return v}function install(v){if(taken||installed||!brands.has(v))throw Error('ENTRY_BRAND');installed=v}function take(){if(taken)throw Error('ENTRY_ONCE');taken=true;const v=installed;installed=null;return v}module.exports={brand,install,take};

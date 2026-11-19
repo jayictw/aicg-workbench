@@ -1,0 +1,34 @@
+import {WorkbenchSave} from '../persistence/LibraryUI'
+import { createPortal } from 'react-dom'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import type { HTMLAttributes, SyntheticEvent } from 'react'
+import { Modal } from '../studio/Modal'
+import { hasPromptEdits, mergedPrompt, organizePrompt, restorePrompt, togglePrompt } from './scene-prompt-state'
+import type { PromptSource } from './scene-prompt-state'
+import { promptSession } from './scene-prompt-session'
+// React synthesizes dialog cancel across portal ancestors; keep this dialog-only event local.
+const dialogBoundary:HTMLAttributes<HTMLDivElement>&{onCancel:(event:SyntheticEvent)=>void}={onCancel:event=>event.stopPropagation(),onKeyDown:event=>event.stopPropagation()}
+export function ScenePrompt({taskId,sceneSignature,output,hasOutput,disabled,current}:{taskId:string;sceneSignature:string;output?:PromptSource;hasOutput:boolean;disabled:boolean;current:()=>PromptSource}){
+ const draft=useSyncExternalStore(promptSession.subscribe,()=>promptSession.get(taskId)),[open,setOpen]=useState(false),[source,setSource]=useState<'draft'|'output'>(promptSession.selected(taskId)||'draft'),[pending,setPending]=useState<(()=>void)|null>(null),[message,setMessage]=useState(''),[error,setError]=useState(''),[copying,setCopying]=useState(false),text=useRef<HTMLTextAreaElement>(null),copyGate=useRef(0)
+ useEffect(()=>()=>{copyGate.current++},[])
+ function invalidateCopy(){copyGate.current++;setMessage('')}
+ function write(next:NonNullable<typeof draft>){invalidateCopy();setError('');promptSession.write(taskId,next)}
+ function organize(kind=source){try{const snapshot=kind==='output'?output:current();if(!snapshot)throw new Error('此输出缺少描述快照，请重新输出参考图；不会以当前草稿猜测旧图。');write(organizePrompt(snapshot));setSource(kind);promptSession.select(taskId,kind);setError('')}catch(error){setError(error instanceof Error?error.message:'无法读取来源，请重试。')}}
+ function guarded(action:()=>void){if(draft&&hasPromptEdits(draft))setPending(()=>action);else action()}
+ function enter(){setSource(promptSession.selected(taskId)||(hasOutput?'output':'draft'));setOpen(true);setMessage('');setError('');if(!draft&&(!hasOutput||output))organize(hasOutput?'output':'draft')}
+ async function copy(){if(!draft||copying)return;const value=mergedPrompt(draft),token=++copyGate.current;setCopying(true);setMessage('');setError('');try{if(!navigator.clipboard?.writeText)throw new Error('剪贴簿不可用');await navigator.clipboard.writeText(value);if(copyGate.current===token)setMessage('补充文字已复制。')}catch{if(copyGate.current===token){text.current?.focus();text.current?.select();setError('复制失败，已选取文字；请按 Ctrl+C 手动复制。')}}finally{setCopying(false)}}
+ return <><div className="m5-prompt-entry"><button type="button" className="secondary-button" disabled={disabled} onClick={enter}>整理场景提示词补充</button><span>依场景设置整理 · 本地规则，无AI调用</span></div>{open&&createPortal(<div {...dialogBoundary}><Modal title="场景提示词补充" className="m5-prompt-dialog ui-r4-stage-dialog ui-r4-scroll-dialog" onClose={()=>{invalidateCopy();setOpen(false)}}><div className="r4-dialog-scroll">
+ <p className="m2-info-copy">依场景设置整理，不是AI理解画面。文字草稿独立于场景草稿；不会写回原提示词或自动添加参考图。</p>
+ <div className="m5-prompt-toolbar"><label className="m2-field">整理来源<select aria-label="提示词补充来源" name="scene-prompt-source" value={source} disabled={copying} onChange={e=>{const next=e.target.value as 'draft'|'output';guarded(()=>organize(next))}}><option value="draft">目前场景草稿</option>{(hasOutput||draft?.source.kind==='output')&&<option value="output" disabled={!output}>已输出的参考图快照{!output?'（当前结果不可用，原文字来源保留）':''}</option>}</select></label><button type="button" className="secondary-button" disabled={copying||(source==='output'&&!output)} onClick={()=>guarded(()=>organize())}>重新依来源整理</button><button type="button" className="m2-text-button" disabled={!draft||copying} onClick={()=>guarded(()=>{if(draft)write(restorePrompt(draft))})}>还原本次整理文字</button></div>
+ {hasOutput&&!output&&<p className="m5-prompt-warning" role="status">此输出没有必要的场景快照，请重新输出参考图。不会用后来修改的场景描述旧图。</p>}
+ {pending&&<div className="m5-prompt-warning" role="alert"><p>此操作会覆盖手动文字或段落选择。确认后继续？</p><button type="button" className="secondary-button" onClick={()=>setPending(null)}>保留现有文字</button><button type="button" className="primary-button" onClick={()=>{const action=pending;setPending(null);action()}}>确认覆盖文字</button></div>}
+ {draft&&<><p className="m5-prompt-provenance" data-testid="prompt-provenance">当前文字：{draft.source.kind==='output'?'参考图快照':'场景草稿'} · {draft.source.task.name} · {draft.source.id}<br/>{draft.ruleVersion} · {new Date(draft.at).toLocaleString()}</p>
+ {draft.source.sceneSignature!==sceneSignature&&<p className="m5-prompt-warning" role="status">场景已变化，现有文字可能过时；本稿仍依原来源快照，手动文字不会自动刷新。</p>}{source!==draft.source.kind||(source==='output'&&output&&output.id!==draft.source.id)?<p className="m5-helper">所选来源与当前文字来源不同；点击重新整理后才会替换。</p>:null}
+ <fieldset className="m5-prompt-sections" disabled={draft.manualText!==null||copying}><legend>包含段落</legend>{draft.sections.map(section=><label className="m2-checkbox" key={section.id}><input type="checkbox" aria-label={`包含${section.label}`} checked={section.enabled} disabled={!section.text} onChange={e=>write(togglePrompt(draft,section.id,e.target.checked))}/>{section.label}{!section.text?'（没有可靠的人物姿态语义）':''}</label>)}</fieldset>
+ <p className="m5-helper">{draft.manualText!==null?'已进入自由编辑：段落勾选暂停，避免覆盖手改；还原本次整理文字后可恢复勾选。':'勾选只组合本次整理的段落；直接改写合并文字后进入自由编辑。'}几何投影不等于无遮挡或完整可见；未作画面内容识别。</p>
+ <label className="m2-field m5-prompt-text">最终补充文字<textarea ref={text} name="scene-prompt-text" aria-label="最终补充文字" value={mergedPrompt(draft)} readOnly={copying} onChange={e=>write({...draft,manualText:e.target.value,unacknowledged:true})} spellCheck={false}/></label>
+ <WorkbenchSave disabled={copying}/><div className="m5-prompt-actions"><button type="button" className="secondary-button" disabled={copying} onClick={()=>{if(window.confirm('丢弃文字只改会话，须保存才更新磁盘；原任务补充不变。继续？')){promptSession.remove(taskId);setOpen(false)}}}>丢弃文字草稿</button><button type="button" className="primary-button" disabled={copying||!mergedPrompt(draft).trim()} onClick={()=>void copy()}>{copying?'正在复制…':'复制补充文字'}</button><button type="button" className="secondary-button" disabled={copying||!draft.unacknowledged} onClick={()=>{promptSession.ack(taskId);setMessage('已确认保留本任务文字；须保存工作资料才落盘，未套用场景。')}}>保留文字草稿</button><span>{draft.unacknowledged?'文字有未确认保留的修改':'文字已暂存于本工作阶段'}</span></div>
+ <details className="m5-prompt-summary"><summary>场景参数摘要与来源快照</summary><p>虚拟感光面高度24mm；场景单位不等于公尺。来源包含实际几何投影、景深状态与原始设置；此处不识别身份、外观或动作时间。</p><pre data-testid="prompt-source-json">{JSON.stringify({ruleVersion:draft.ruleVersion,source:draft.source},null,2)}</pre></details></>}
+ {error&&<p className="m5-errors" role="alert">{error}</p>}<p className="m5-helper" role="status">{message}</p><p className="m5-helper">文字按任务独立；手动保存后可重开恢复。套回任务仍须重新确认，不自动写入或复制。</p>
+ </div></Modal></div>,document.body)}</>
+}

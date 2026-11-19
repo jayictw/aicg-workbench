@@ -1,0 +1,4 @@
+'use strict';
+const {error}=require('./media.cjs');
+function assertPrivate({args=process.argv.slice(2),execArgv=process.execArgv,env=process.env,hasSwitch=()=>false}={}){const forbidden=/^--(?:inspect(?:-brk|-port|-publish-uid)?|remote-debugging(?:-port|-address|-pipe)?|enable-logging|log-file|js-flags|require|import|eval|loader|experimental-loader)(?:=|$)/;if([...args,...execArgv].some(x=>forbidden.test(x))||['remote-debugging-port','remote-debugging-pipe','remote-debugging-address','inspect','inspect-brk','enable-logging','log-file'].some(hasSwitch)||['NODE_OPTIONS','ELECTRON_ENABLE_LOGGING','ELECTRON_ENABLE_STACK_DUMPING','ELECTRON_RUN_AS_NODE'].some(k=>!!env[k]))throw error('VIDEO_PRIVATE_INPUT_DEBUG_FORBIDDEN','One-time credential input requires a normal private launch without debugging or logging hooks');return true;}
+module.exports={assertPrivate};

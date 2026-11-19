@@ -1,0 +1,126 @@
+{
+  "catalogVersion": 1,
+  "contractVersion": 3,
+  "provider": "byteplus-modelark",
+  "region": "ap-southeast-1",
+  "apiOrigin": "https://ark.ap-southeast.bytepluses.com",
+  "checkedDate": "2026-11-11",
+  "evidenceLevel": "OFFICIAL_PUBLIC_DOCUMENTS_AND_LOCAL_SOURCE_ONLY",
+  "accountEntitlement": "UNKNOWN",
+  "endpointBinding": "UNKNOWN",
+  "models": [
+    {
+      "canonicalModelId": "dreamina-seedance-2-5-260628",
+      "label": "Dreamina Seedance 2.5",
+      "selectorKind": "endpoint_id",
+      "selectorValue": null,
+      "selectorProvenance": "INSTALLATION_UNCONFIGURED",
+      "publicSelectorKinds": [
+        "model_id",
+        "endpoint_id"
+      ],
+      "apiPath": "/api/v3/contents/generations/tasks",
+      "operations": [
+        {
+          "operation": "video.text_to_video",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        },
+        {
+          "operation": "video.first_frame",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": true,
+          "subset": "4s/480p/adaptive/one frame/audio on/watermark/mp4"
+        },
+        {
+          "operation": "video.first_last_frame",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": true,
+          "subset": "4s/480p/adaptive/two frames/audio on/watermark/mp4"
+        },
+        {
+          "operation": "video.reference_images",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": true,
+          "subset": "1-30 images/4s/480p/local approved ratios/audio on/watermark/mp4"
+        },
+        {
+          "operation": "video.reference_video",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        },
+        {
+          "operation": "video.mixed_reference",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        },
+        {
+          "operation": "video.edit",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        },
+        {
+          "operation": "video.extend",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        }
+      ],
+      "parameterCapabilities": {
+        "officialAudioGeneration": "SUPPORTED",
+        "workbenchAudioControl": "ALWAYS_ON_ONLY"
+      },
+      "sources": [
+        "https://docs.byteplus.com/en/docs/modelark/model-list",
+        "https://docs.byteplus.com/en/docs/modelark/seedance-2-5",
+        "https://docs.byteplus.com/en/docs/modelark/create-video-generation-task-api"
+      ]
+    },
+    {
+      "canonicalModelId": "dola-seedream-5-0-pro-260628",
+      "label": "Dola Seedream 5.0 Pro",
+      "selectorKind": "endpoint_id",
+      "selectorValue": null,
+      "selectorProvenance": "INSTALLATION_UNCONFIGURED",
+      "publicSelectorKinds": [
+        "model_id",
+        "endpoint_id"
+      ],
+      "apiPath": "/api/v3/images/generations",
+      "operations": [
+        {
+          "operation": "image.text_to_image",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": true,
+          "subset": "one PNG/base64 output/existing approved sizes and watermark contracts"
+        },
+        {
+          "operation": "image.single_reference",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": true,
+          "subset": "one reference/one PNG/base64 output"
+        },
+        {
+          "operation": "image.multi_reference",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": true,
+          "subset": "2-10 references/one PNG/base64 output"
+        },
+        {
+          "operation": "image.interactive_edit",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        },
+        {
+          "operation": "image.layer_decomposition",
+          "officialSupport": "SUPPORTED",
+          "workbenchImplemented": false
+        }
+      ],
+      "sources": [
+        "https://docs.byteplus.com/en/docs/modelark/model-list",
+        "https://docs.byteplus.com/en/docs/modelark/seedream-5-0-pro",
+        "https://docs.byteplus.com/en/docs/modelark/image-generation-api"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+ 'use strict';
+const fs=require('node:fs'),path=require('node:path'),c=require('./uk-common.cjs'),{boundary}=require('./runtime-paths.cjs');const brands=new WeakMap();
+function policy(profileRoot,domain='offline'){if(!['offline','controlled-network','provider'].includes(domain))c.fail('UK_DOMAIN');const root=boundary(path.resolve(profileRoot)),file=path.join(root,'credential-domain.v1.json'),stamp={version:1,domain,profile:root.toLowerCase()};boundary(file);fs.mkdirSync(root,{recursive:true});
+ if(fs.existsSync(file)){const st=fs.statSync(file);if(!st.isFile()||st.nlink!==1||st.size>4096||!c.same(c.parse(fs.readFileSync(file)),stamp))c.fail('UK_DOMAIN_MISMATCH')}
+ else{const names=['security','unified-actions.owner.json','unified-actions.v2.owner.json','source-admissions.owner.json','d1-candidates'];for(const base of ['unified-actions.v1.sqlite','unified-actions.v2.sqlite','source-admissions.v1.sqlite'])for(const suffix of ['','-wal','-shm','-journal'])names.push(base+suffix);if(names.some(n=>fs.existsSync(path.join(root,n))))c.fail('UK_DOMAIN_MISSING');fs.writeFileSync(file,c.canonical(stamp),{flag:'wx'});const fd=fs.openSync(file,'r+');try{fs.fsyncSync(fd)}finally{fs.closeSync(fd)}}
+ const value=Object.freeze({domain,profile:root,managed:domain==='provider'});brands.set(value,stamp);return value}
+function validate(value,profile){const s=brands.get(value);if(!s||s.profile!==path.resolve(profile).toLowerCase())c.fail('UK_DOMAIN');const file=path.join(profile,'credential-domain.v1.json');boundary(file);const st=fs.statSync(file);if(!st.isFile()||st.nlink!==1||st.size>4096||!c.same(c.parse(fs.readFileSync(file)),s))c.fail('UK_DOMAIN_MISMATCH');return value}
+module.exports=Object.freeze({policy,validate});

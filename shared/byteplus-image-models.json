@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "defaultModel": "dola-seedream-5-0-pro-260628",
+  "provider": "byteplus-modelark",
+  "region": "ap-southeast-1",
+  "endpoint": "https://ark.ap-southeast.bytepluses.com/api/v3/images/generations",
+  "routing": "Per-install explicit Endpoint configuration; unconfigured requests are rejected; account not verified",
+  "models": [
+    {
+      "id": "dola-seedream-5-0-pro-260628",
+      "label": "Seedream 5.0 Pro",
+      "validation": "offline-contract-only",
+      "realPaidVerified": false,
+      "sizes": [
+        {
+          "ratio": "1:1",
+          "size": "2048x2048",
+          "tier": "2K",
+          "uiPreset": true
+        },
+        {
+          "ratio": "4:5",
+          "size": "1792x2240",
+          "tier": "2K",
+          "uiPreset": true
+        },
+        {
+          "ratio": "16:9",
+          "size": "2048x1152",
+          "tier": "1.5K",
+          "uiPreset": true
+        },
+        {
+          "ratio": "9:16",
+          "size": "1152x2048",
+          "tier": "1.5K",
+          "uiPreset": true
+        },
+        {
+          "ratio": "1:1",
+          "size": "1024x1024",
+          "tier": "1K"
+        },
+        {
+          "ratio": "4:3",
+          "size": "1152x864",
+          "tier": "1K"
+        },
+        {
+          "ratio": "3:4",
+          "size": "864x1152",
+          "tier": "1K"
+        },
+        {
+          "ratio": "16:9",
+          "size": "1424x800",
+          "tier": "1K"
+        },
+        {
+          "ratio": "9:16",
+          "size": "800x1424",
+          "tier": "1K"
+        },
+        {
+          "ratio": "3:2",
+          "size": "1248x832",
+          "tier": "1K"
+        },
+        {
+          "ratio": "2:3",
+          "size": "832x1248",
+          "tier": "1K"
+        },
+        {
+          "ratio": "21:9",
+          "size": "1568x672",
+          "tier": "1K"
+        }
+      ],
+      "endpointRoute": {
+        "id": null,
+        "region": "ap-southeast-1",
+        "apiDomain": "ark.ap-southeast.bytepluses.com",
+        "declaredProject": null,
+        "source": "owner-provided",
+        "projectIdentityVerified": false,
+        "endpointModelVerified": false
+      },
+      "defaultSize": "2048x2048"
+    },
+    {
+      "id": "dola-seedream-5-0-flash-260915",
+      "label": "Seedream 5.0 Flash",
+      "validation": "offline-contract-only; historical HTTP403 observed",
+      "realPaidVerified": false,
+      "sizes": [
+        {
+          "ratio": "1:1",
+          "size": "1024x1024",
+          "tier": "1K"
+        }
+      ]
+    }
+  ],
+  "sizeSource": "https://ai.byteplus.com/ark/region:ap-southeast-1/docs/image-generation-api"
+}

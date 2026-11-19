@@ -1,0 +1,49 @@
+import {editableView,controlledChange} from './controlled-changes'
+import type {NativeChange} from './controlled-changes'
+import type {ProposalList} from './McpProposals'
+import {useEffect,useState,useSyncExternalStore} from 'react'
+import {workspace} from '../management/store'
+import {generated} from '../generated/store'
+import {persistence} from './session'
+type Status={connected:boolean;authorized:boolean;expiresAt:number|null;readOnly:true;latest:unknown;codexClient:string}
+type LaunchStatus={phase:string;launchBlocked:boolean;code?:string|null}
+type ExternalStatus={launch?:LaunchStatus;state:string;connected:boolean;prepared:boolean;authorized:boolean;expiresAt:number|null;client:string|null;ownerGrant:boolean;proposalPermission:boolean;events:{type:string;tool?:string;allowed?:boolean;code?:string;total?:number;at:number}[]}
+type TraceSource={entry:string;origin:string;trustedEvent?:boolean}
+type Bridge={onExternalState?:(f:()=>void)=>()=>void;externalGrantProposals:(diagnostic?:TraceSource)=>Promise<unknown>;proposalList:()=>Promise<ProposalList>;proposalApply:(id:string)=>Promise<unknown>;proposalReject:(id:string)=>Promise<unknown>;proposalUndo:(id:string)=>Promise<unknown>;onCommand:(f:(p:NativeChange)=>unknown)=>()=>void;externalPrepare:()=>Promise<unknown>;externalStatus:()=>Promise<ExternalStatus>;externalGrant:(diagnostic?:TraceSource)=>Promise<unknown>;externalRevoke:()=>Promise<unknown>;externalDisconnect:()=>Promise<unknown>;externalLaunch:()=>Promise<unknown>;status:()=>Promise<Status>;connect:()=>Promise<unknown>;grant:(diagnostic?:TraceSource)=>Promise<unknown>;revoke:()=>Promise<unknown>;disconnect:()=>Promise<unknown>;demo:()=>Promise<unknown>;onRead:(f:()=>unknown)=>()=>void}
+declare global{interface Window{mcpReadOnly?:Bridge}}
+function view(){
+ const s=persistence.get(),w=workspace.get();if(s.phase!=='ready'&&s.phase!=='failed')throw Error('MCP_VIEW_NOT_READY')
+ // A projection from the actual UI stores, never a separately maintained workspace.
+ return {editable:editableView(),changeReceipts:w.changeReceipts||[],libraryId:stageWork.library(),revision:s.revision,generation:s.generation,savedGeneration:s.savedGeneration,
+  projects:w.projects.map(p=>({id:p.id,name:p.name,description:p.description,createdAt:p.createdAt,updatedAt:p.updatedAt})),
+  tasks:w.tasks.map(t=>({id:t.id,projectId:t.projectId,kind:t.kind,name:t.name,createdAt:t.createdAt,updatedAt:t.updatedAt})),
+  assets:w.assets.map(a=>({id:a.id,name:a.name,media:a.media,width:a.width,height:a.height,size:a.size,duration:a.duration,usages:a.usages,origin:a.origin,source:a.source&&{taskId:a.source.taskId,resultId:a.source.resultId}})),
+  relations:w.tasks.flatMap(t=>((t.kind==='image'?w.images:w.videos)[t.id]?.draft?.refs||[]).map((r,index)=>({taskId:t.id,referenceId:r.id,assetId:r.assetId||null,index,purpose:r.category,selected:r.generationUse!=='retained'&&(t.kind==='image'?w.images:w.videos)[t.id]?.draft?.creationInput?.referenceUse!=='retained',origin:r.assetId?'library':r.stageSource?'studio':'local'}))),
+  results:generated.get().results.map(r=>({resultId:r.resultId,taskId:r.taskId,representation:r.representation,sourceKind:r.source.kind,mime:r.current.mime,byteSize:r.current.byteSize,sha256:r.current.sha256,width:r.current.detail.width,height:r.current.detail.height}))}
+}
+// Session identity comes from existing stageWork binding, not the active task.
+import {stageWork} from '../stage3d/work-state'
+export function McpViewBridge(){useEffect(()=>{const read=window.mcpReadOnly?.onRead(view),command=window.mcpReadOnly?.onCommand(controlledChange);return()=>{read?.();command?.()}},[]);return null}
+export function McpReadOnly(){
+ const save=useSyncExternalStore(persistence.subscribe,persistence.get),[s,set]=useState<Status|null>(null),[busy,B]=useState(false),[error,E]=useState('')
+ useEffect(()=>{let live=true;const sync=()=>void window.mcpReadOnly?.status().then(v=>{if(live)set(v)}).catch(()=>{if(live)E('连接状态不可用')});sync();const t=setInterval(sync,1500);return()=>{live=false;clearInterval(t)}},[])
+ if(!window.mcpReadOnly)return null
+ async function run(action:()=>Promise<unknown>){B(true);E('');try{await action();set(await window.mcpReadOnly!.status())}catch(e){const m=String((e as Error).message).match(/MCP_[A-Z_]+/)?.[0];E(m==='MCP_SCOPE_EXPIRED'?'授权已失效，请重新授予当前隔离工作库。':m==='MCP_NO_OPEN_QA_LIBRARY'?'请先在本窗口打开隔离 QA 工作库。':m||'本地只读连接失败，请重试。')}finally{B(false)}}
+ return <><McpExternal/><details><summary>内部测试客户端（工程回归）</summary><section aria-labelledby="mcp-heading" className="mcp-readonly"><h2 id="mcp-heading">M9 MCP · 本地只读连接</h2><p>连接本机测试客户端，再明确授权当前已打开的隔离 QA 工作库。授权10分钟有效，切库、关库、撤销或退出后失效。</p><p>只查询项目、任务、素材元数据、已保存棚输出与本地状态。查询分别标示内存草稿和已保存版本。</p><p role="status">{s?.connected?'已连接本地 stdio 客户端':'尚未连接'} · {s?.authorized?'已授权只读，至 '+new Date(s.expiresAt!).toLocaleTimeString():'尚未授权或授权已失效'} · 当前已保存 r{save.revision}{save.generation!==save.savedGeneration?'，有未保存修改':''}</p><div className="library-actions"><button className="secondary-button" disabled={busy||!!s?.connected} onClick={()=>void run(window.mcpReadOnly!.connect)}>连接本地测试客户端</button><button className="secondary-button" disabled={busy||!s?.connected||!save.cap} data-trace-entry="internal-read-grant" onClick={e=>void run(()=>window.mcpReadOnly!.grant({entry:'internal-read-grant',origin:'ui',trustedEvent:e.nativeEvent.isTrusted}))}>授予当前 QA 工作库只读范围</button><button className="secondary-button" disabled={busy||!s?.authorized} onClick={()=>void run(window.mcpReadOnly!.demo)}>运行只读协议演示</button><button className="secondary-button" disabled={busy||!s?.connected} onClick={()=>void run(window.mcpReadOnly!.revoke)}>撤销只读授权</button><button className="secondary-button" disabled={busy||!s?.connected} onClick={()=>void run(window.mcpReadOnly!.disconnect)}>断开连接</button></div>{error&&<p role="alert">{error}</p>}<p>真实 Codex 客户端连接：NOT_RUN。此入口使用本地测试客户端，不会写入持久 MCP 配置。</p>{s?.latest!=null&&<details><summary>查看本次只读协议返回</summary><pre style={{maxHeight:400,overflow:'auto',whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{JSON.stringify(s.latest,null,2)}</pre></details>}</section></details></>
+}
+
+function launchNotice(s:ExternalStatus|null){
+ const l=s?.launch;if(!l||l.phase==='idle')return '';
+ if(l.phase==='starting')return '正在启动独立终端，请勿重复点击。';
+ if(l.phase==='waiting-connection')return '终端已报告交互控制台就绪，等待 MCP 握手；尚未确认连接。';
+ if(l.phase==='connected'&&s?.connected)return 'MCP 握手及22个工具发现已确认；业务权限以原生授权范围为准。';
+ if(l.phase==='failed')return '启动失败（'+(l.code||'MCP_CLI_START_FAILED')+'）。请先检查本次终端；关闭后断开连接并重新准备，不会自动重试。';
+ return '连接未确认（'+(l.code||'MCP_CLI_CONNECTION_UNCONFIRMED')+'）。请先检查已打开的本次终端及连接状态；勿重复启动。确认终端关闭后，断开并重新准备短效接入。';
+}
+function McpExternal(){
+ const save=useSyncExternalStore(persistence.subscribe,persistence.get),[s,S]=useState<ExternalStatus|null>(null),[busy,B]=useState(false),[error,E]=useState('');
+ useEffect(()=>{let live=true;const sync=()=>void window.mcpReadOnly?.externalStatus().then(v=>{if(live)S(v)}).catch(()=>{if(live)E('外部连接状态不可用')});sync();const off=window.mcpReadOnly?.onExternalState?.(sync);window.addEventListener('focus',sync);const timer=setInterval(sync,1000);return()=>{live=false;clearInterval(timer);off?.();window.removeEventListener('focus',sync)}},[]);
+ if(!window.mcpReadOnly)return null;
+ async function run(fn:()=>Promise<unknown>){B(true);E('');try{await fn();S(await window.mcpReadOnly!.externalStatus())}catch(e){E(String((e as Error).message).match(/MCP_[A-Z_]+/)?.[0]||'外部连接未完成')}finally{B(false)}}
+ return <section className="mcp-external" aria-labelledby="mcp-external-title"><h2 id="mcp-external-title">M9 · 外部 Codex 连接</h2><p>先准备短效本机接入，再打开独立 Codex CLI。连接身份经 Windows 核验后，Owner 仍需在原生窗口明确授予当前 QA 工作库只读范围。</p><p>不写持久 MCP 设置，不使用连接 token。15个只读工具及7个受控提案工具；提案须单独授权，每项由你确认套用。不自动保存、不生成、不查供应商。切库、关库、撤销、断开、到期或退出后，旧授权失效。</p><p role="status">{s?.connected?(s?.launch?.phase&&s.launch.phase!=='idle'&&s.launch.phase!=='connected'?'连接身份已核验，等待 MCP 握手':'已连接 '+s.client):s?.prepared?'等待独立 Codex CLI 连接':'尚未准备外部接入'} · {s?.authorized?(s.proposalPermission?'已允许提出草稿，套用仍由你确认':'已授予当前库只读范围'):'尚未授权或授权已撤销'}{s?.expiresAt?' · 连接截至 '+new Date(s.expiresAt).toLocaleTimeString():''} · 当前已保存 r{save.revision}</p>{launchNotice(s)&&<p role="status" data-cli-launch-state={s?.launch?.phase}>{launchNotice(s)}</p>}<div className="library-actions"><button className="secondary-button" disabled={busy||!!s?.prepared} data-trace-entry="prepare-external" onClick={()=>void run(window.mcpReadOnly!.externalPrepare)}>准备外部只读接入</button><button className="secondary-button" disabled={busy||!s?.prepared||!!s?.connected||!!s?.launch?.launchBlocked} data-trace-entry="launch-cli" onClick={()=>void run(window.mcpReadOnly!.externalLaunch)}>打开独立 Codex CLI</button><button className="secondary-button" disabled={busy||!s?.connected||!save.cap} data-trace-entry="external-read-grant" onClick={e=>void run(()=>window.mcpReadOnly!.externalGrant({entry:'external-read-grant',origin:'ui',trustedEvent:e.nativeEvent.isTrusted}))}>Owner 授予外部 Codex 只读范围</button><button className="secondary-button" disabled={busy||!s?.authorized||s?.proposalPermission} data-trace-entry="external-proposal-grant" onClick={e=>void run(()=>window.mcpReadOnly!.externalGrantProposals({entry:'external-proposal-grant',origin:'ui',trustedEvent:e.nativeEvent.isTrusted}))}>允许 Codex 提出修改草稿</button><button className="secondary-button" disabled={busy||!s?.connected} onClick={()=>void run(window.mcpReadOnly!.externalRevoke)}>撤销外部授权</button><button className="secondary-button" disabled={busy||!s?.prepared} onClick={()=>void run(window.mcpReadOnly!.externalDisconnect)}>断开外部连接</button></div>{error&&<p role="alert">{error}</p>}<p>n7q2／M9 R1 本切片人工验收已通过。本轮 R2 工程与人工验收分别记录；连接不代表 R2 人工通过。</p>{!!s?.events.length&&<details><summary>查看脱敏连接与查询事件</summary><ul>{s.events.map((e,i)=><li key={i}>{new Date(e.at).toLocaleTimeString()} · {e.type}{e.tool?' · '+e.tool:''}{e.code?' · '+e.code:''}{e.total!==undefined?' · 数量 '+e.total:''}</li>)}</ul></details>}</section>
+}

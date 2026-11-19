@@ -1,0 +1,1 @@
+const {contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('oneFee',Object.freeze(Object.fromEntries(['context','edit','refresh','approveOnce','cancel'].map(m=>[m,r=>ipcRenderer.invoke('fee:'+m,r)]))));

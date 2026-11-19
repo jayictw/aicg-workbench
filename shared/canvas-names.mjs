@@ -1,0 +1,7 @@
+const fail=(code,message)=>{throw Object.assign(new Error(message),{code});};
+export const nameKey=s=>String(s??'').normalize('NFKC').trim().replace(/\s+/g,'').replaceAll('場','场').replaceAll('鏡','镜').replaceAll('圖','图').replaceAll('務','务').toLowerCase().replace(/^(.*?)(\d+)$/u,(_,a,b)=>a+Number(b));
+export function nameTaken(g,label,except=null){const k=nameKey(label);return g.nodes.some(n=>n.id!==except&&[n.label,n.humanCode,n.id].some(v=>v&&nameKey(v)===k));}
+export function exactName(g,label,except=null){if(typeof label!=='string'||!label.trim()||label.length>160||label.includes('\0'))fail('CANVAS_NAME','名稱須為1–160字');const out=label.trim();if(nameTaken(g,out,except))fail('CANVAS_NAME_EXISTS','此畫布已有「'+out+'」，請指定另一個名稱或明確既有目標');return out;}
+export function automaticName(g,prefix){for(let i=1;i<=10000;i++){const s=prefix+String(i).padStart(2,'0');if(!nameTaken(g,s))return s;}fail('CANVAS_NAME_LIMIT','可讀名稱已達上限');}
+export function uniqueName(g,label){if(!nameTaken(g,label))return exactName(g,label);for(let i=2;i<=10000;i++){const suffix=' '+i,s=label.slice(0,160-suffix.length)+suffix;if(!nameTaken(g,s))return exactName(g,s);}fail('CANVAS_NAME_LIMIT','可讀名稱已達上限');}
+export function classificationPrefix(value){const classes={character:'人物',product:'商品',scene:'場景',generic:'素材'};if(typeof value!=='string'||!Object.hasOwn(classes,value))fail('IMAGE_CLASSIFICATION','請明確指定人物、商品、場景或未分類素材');return classes[value];}

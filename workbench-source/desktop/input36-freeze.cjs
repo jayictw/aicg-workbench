@@ -1,0 +1,4 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),c=require('./d1-json.cjs');
+function assertFreeze(){const root=require('./input36-policy.cjs').ROOT,code=path.resolve(__dirname,'..'),f=JSON.parse(fs.readFileSync(path.join(root,'FREEZE.json')));if(f.runId!==require('../integration-build.json').buildId||f.planSha256!==require('./input36-seal.cjs').sha256||f.status!=='FROZEN_AWAITING_NEW_USER_APPROVAL')throw Error('SIX_FREEZE_REQUIRED');for(const e of f.code){const b=fs.readFileSync(path.join(code,e.path));if(b.length!==e.bytes||c.hash(b)!==e.sha256)throw Error('SIX_CODE_DRIFT')}for(const e of f.inputs){const b=fs.readFileSync(path.join(root,e.path));if(b.length!==e.bytes||c.hash(b)!==e.sha256)throw Error('SIX_FROZEN_INPUT_DRIFT')}return f}
+module.exports={assertFreeze};
