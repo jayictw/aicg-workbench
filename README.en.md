@@ -4,7 +4,7 @@
 
 **Discounted Seedance API access: contact the developer.**
 
-AICG Workbench brings image and video tasks, media, scene layout, and clip assembly onto one Windows canvas. A local Agent can work alongside you with the access you grant.
+AICG Workbench lets people and Agents create images and videos together on one canvas through an open local MCP interface. You direct the work and review results visually; an authorized Agent reads the canvas, organizes tasks, edits prompts and settings, and helps stage shots and arrange results and clips. This Windows release supports same-machine standard stdio MCP without a specific Agent brand requirement; actual connections depend on client compatibility and the access you grant.
 
 ## Install and start
 
